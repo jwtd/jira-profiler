@@ -4,11 +4,11 @@
 
 Command line tool to analyze project, team, and user activity in Jira.
 
-[![Build Status](https://travis-ci.org/jwtd/jira-profiler.png?branch=master)](https://travis-ci.org/jwtd/jira-profiler)
+[![Gem Version](https://badge.fury.io/rb/sinderella.png)](http://badge.fury.io/rb/jira-profiler) [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+[![Build Status](https://travis-ci.org/jwtd/jira-profiler.svg?branch=master)](https://travis-ci.org/jwtd/jira-profiler) [![Coverage Status](https://coveralls.io/repos/github/jwtd/jira-profiler/badge.svg?branch=master)](https://coveralls.io/github/jwtd/jira-profiler?branch=master) [![Code Climate](https://codeclimate.com/github/jwtd/jira-profiler/badges/gpa.svg)](https://codeclimate.com/github/jwtd/jira-profiler)
 
-[![Gem Version](https://badge.fury.io/rb/sinderella.png)](http://badge.fury.io/rb/jira-profiler)
+<img src="http://img.shields.io/badge/license-MIT-yellowgreen.svg" alt="License" data-pin-nopin="true">
 
-[![Coverage Status](https://coveralls.io/repos/jwtd/jira-profiler/badge.png)](https://coveralls.io/r/jwtd/jira-profiler)
 
 ## Installation
 
