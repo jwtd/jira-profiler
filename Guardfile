@@ -24,19 +24,37 @@
 #  * zeus: 'zeus rspec' (requires the server to be started separately)
 #  * 'just' rspec: 'rspec'
 
+# guard :bundler do
+#   watch('Gemfile')
+# end
+
+
 guard :rspec, cmd: "bundle exec rspec" do
+
+  require 'guard/bundler'
+  require 'guard/bundler/verify'
+
+  helper = Guard::Bundler::Verify.new
+  files = ['Gemfile']
+  files += Dir['*.gemspec'] if files.any? { |f| helper.uses_gemspec?(f) }
+  # Assume files are symlinked from somewhere
+  files.each { |file| watch(helper.real_path(file)) }
 
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
-
-  # Ruby files
-  ruby = dsl.ruby
-  dsl.watch_spec_files_for(ruby.lib_files)
 
   # RSpec files
   rspec = dsl.rspec
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
+  watch(%r{^spec/factories/(.+)\.rb$}) { rspec.spec_dir }
+  watch(%r{^spec/sequences/(.+)\.rb$}) { rspec.spec_dir }
   watch(rspec.spec_files)
 
+  # Ruby files
+  ruby = dsl.ruby
+  dsl.watch_spec_files_for(ruby.lib_files)
+  watch(%r{^lib/(.+)\.rb$}) { |m| "spec/#{m[1]}_spec.rb" }
+
 end
+

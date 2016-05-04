@@ -2,6 +2,8 @@ language: ruby
 rvm:
   - ruby-head
   - 2.2.5
-
 before_install: gem install bundler -v 1.10.4
 script: 'bundle exec rake'
+addons:
+    code_climate:
+        repo_token: 3bc9be486501ed4694dee8097cd544ac0525744f4fd6af42454598914cd343eb

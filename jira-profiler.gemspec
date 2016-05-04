@@ -21,13 +21,18 @@ Gem::Specification.new do |spec|
 
   # Dev dependencies
   spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 11.0"
   spec.add_development_dependency "rspec", "~> 3.4"
   spec.add_development_dependency "rspec-nc"
   spec.add_development_dependency "guard"
+  spec.add_development_dependency "guard-bundler"
   spec.add_development_dependency "guard-rspec"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-remote"
   spec.add_development_dependency "pry-nav"
   spec.add_development_dependency "coveralls"
+  spec.add_development_dependency "codeclimate-test-reporter"
+
+  # Runtime dependencies
+  spec.add_dependency "logging", "~> 2.1.0"
 end
