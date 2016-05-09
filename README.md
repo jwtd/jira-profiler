@@ -4,7 +4,7 @@
 
 Command line tool to analyze project, team, and user activity in Jira.
 
-[![Gem Version](https://badge.fury.io/rb/sinderella.png)](http://badge.fury.io/rb/jira-profiler) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://github.com/jwtd/jira-profiler#License)
+[![Gem Version](https://badge.fury.io/rb/sinderella.png)](http://badge.fury.io/rb/jira-profiler) [![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](https://github.com/jwtd/jira-profiler#license)
 [![Build Status](https://travis-ci.org/jwtd/jira-profiler.svg?branch=master)](https://travis-ci.org/jwtd/jira-profiler) [![Coverage Status](https://coveralls.io/repos/github/jwtd/jira-profiler/badge.svg?branch=master)](https://coveralls.io/github/jwtd/jira-profiler?branch=master) [![Code Climate](https://codeclimate.com/github/jwtd/jira-profiler/badges/gpa.svg)](https://codeclimate.com/github/jwtd/jira-profiler) [![Dependency Status](https://gemnasium.com/badges/github.com/jwtd/jira-profiler.svg)](https://gemnasium.com/github.com/jwtd/jira-profiler)
 
 

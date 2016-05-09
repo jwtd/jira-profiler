@@ -19,7 +19,7 @@ module JiraProfiler
 
   # Allow configuration from hash
   def self.configure_from_hash(h)
-    @configuration = Configuration.from_hash(h)
+    @configuration = Configuration.new(h)
   end
 
   # Allow configuration from yaml file
@@ -74,11 +74,6 @@ module JiraProfiler
 
     def output_file
       @output_file || "#{app_name.to_dash_case}_output"
-    end
-
-    # Hash constructor
-    def self.from_hash(h)
-      self.new(h)
     end
 
     # File constructor

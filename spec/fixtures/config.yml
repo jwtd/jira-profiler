@@ -1,0 +1,12 @@
+language: ruby
+app_name:
+output_file:
+log_level: info
+trace_exceptions: false
+log_to_stdout: false
+stdout_colors: for_light_background
+log_file: foo.log
+log_file_layout: :rich
+rolling_log_file_age: true
+rolling_log_limit: true
+growl_on_error: true
