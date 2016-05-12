@@ -60,8 +60,8 @@ module JiraProfiler
       @trace_exceptions     = options[:trace_exceptions]     || true
       @log_to_stdout        = options[:log_to_stdout]        || true
       @stdout_colors        = options[:stdout_colors]        || :for_dark_background
-      @log_file             = options[:log_file]             || nil
-      @log_file_layout      = options[:log_file_layout]      || :basic
+      @log_file             = options[:log_file]             || "#{app_name.to_dash_case}_log.txt"
+      @log_file_layout      = options[:log_file_layout]      || '[%d] %-5l -- %c -- %m\n'
       @rolling_log_file_age = options[:rolling_log_file_age] || false
       @rolling_log_limit    = options[:rolling_log_limit]    || false
       @growl_on_error       = options[:growl_on_error]       || false

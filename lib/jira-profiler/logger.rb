@@ -97,8 +97,8 @@ module JiraProfiler
 
     # Setup file logger
     log_file = options[:log_file] || configuration.log_file
-    if log_file
-      puts "log_file: #{log_file}"
+    if options[:log_to_file]
+      #puts "log_file: #{log_file}"
 
       # Make sure log directory exists
       log_file = File.expand_path(log_file)
@@ -116,10 +116,9 @@ module JiraProfiler
         use_layout = Logging::Layouts::YAML.new()
       else
         use_layout = Logging.layouts.pattern(:pattern => layout) # '[%d] %-5l -- %c -- %m\n'
+        # Capturing milliseconds in date
+        use_layout.date_pattern = '%Y-%m-%d %H:%M:%S:%L'
       end
-
-      # Make sure we're capturing milliseconds in date
-      use_layout.date_pattern = '%Y-%m-%d %H:%M:%S:%L'
 
       # Determine if this should be a single or rolling log file
       rolling = options[:rolling_log_file_age] || configuration.rolling_log_file_age
