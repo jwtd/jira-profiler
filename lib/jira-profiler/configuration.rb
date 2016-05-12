@@ -56,7 +56,7 @@ module JiraProfiler
       @app_name             = options[:app_name]
       @output_file          = options[:output_file]
 
-      @log_level            = options[:log_level]            || :debug
+      @log_level            = options[:log_level]            || :info
       @trace_exceptions     = options[:trace_exceptions]     || true
       @log_to_stdout        = options[:log_to_stdout]        || true
       @stdout_colors        = options[:stdout_colors]        || :for_dark_background
@@ -65,6 +65,8 @@ module JiraProfiler
       @rolling_log_file_age = options[:rolling_log_file_age] || false
       @rolling_log_limit    = options[:rolling_log_limit]    || false
       @growl_on_error       = options[:growl_on_error]       || false
+
+      @log_level = @log_level.to_sym unless @log_level.nil?
 
     end
 

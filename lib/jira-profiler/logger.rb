@@ -38,21 +38,18 @@ module JiraProfiler
   def self.configure_global_logger(options={})
 
     # Collect and validate log level
-    log_level = options[:log_level] || configuration.log_level || true
-    log_level = log_level.to_sym
+    log_level = options[:log_level] || configuration.log_level || :info
     raise "Can not initialize global logger, because #{log_level.inspect} is an unrecognized log level." unless [:off, :all, :debug, :info, :warn, :error, :fatal].include?(log_level.to_sym)
     Logging.logger.root.level = log_level
-    puts "log_level: #{log_level}"
 
     # When set to true backtraces will be written to the logs
     trace_exceptions = options[:trace_exceptions] || configuration.trace_exceptions || true
-    puts "trace_exceptions: #{trace_exceptions}"
-    Logging.logger.root.trace = trace_exceptions
+    Logging.logger.root.caller_tracing = trace_exceptions
 
     # Check to see if we should log to stdout
-    log_to_stdout = options[:log_to_stdout] || configuration.log_to_stdout
+    log_to_stdout = options[:log_to_stdout] || configuration.log_to_stdout || true
     if log_to_stdout
-      puts "log_to_stdout: #{log_to_stdout}"
+      #puts "log_to_stdout: #{log_to_stdout}"
 
       # Setup colorized output for stdout (this scheme was setup for a terminal with a black background)
       # :black, :red, :green, :yellow, :blue, :magenta, :cyan, :white
@@ -155,7 +152,8 @@ module JiraProfiler
       end
 
     end
-    # Return the root logger
+    # Save and return the root logger
+    @@global_logger = Logging.logger.root
     Logging.logger.root
   end
 
