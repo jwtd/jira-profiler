@@ -9,3 +9,5 @@ String.include CoreExtensions::String
 require "jira-profiler/version"
 require "jira-profiler/logger"
 require "jira-profiler/configuration"
+require "jira-profiler/team"
+require "jira-profiler/project"

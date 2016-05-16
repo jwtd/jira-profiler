@@ -37,4 +37,6 @@ Gem::Specification.new do |spec|
 
   # Runtime dependencies
   spec.add_dependency 'logging', '~> 2.1.0'
+  spec.add_dependency 'httparty'
+
 end
