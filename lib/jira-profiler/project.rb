@@ -1,12 +1,6 @@
-require 'httparty'
-
 module JiraProfiler
 
-  class Project
-
-    include HTTParty
-    base_uri 'virtru.atlassian.net'
-    basic_auth ENV.fetch('JIRA_UN'), ENV.fetch('JIRA_PW')
+  class Project < JiraApiBase
 
     attr_reader :id, :name
 

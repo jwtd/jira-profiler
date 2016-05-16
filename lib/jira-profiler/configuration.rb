@@ -35,6 +35,8 @@ module JiraProfiler
   # Define the configuration options
   class Configuration
 
+    attr_writer   :app_name             # Name of app
+    attr_writer   :output_file          # Filename of data export
     attr_accessor :log_level            # :off, :all, :debug, :info, :warn, :error, :fatal
     attr_accessor :trace_exceptions     # Default is true
     attr_accessor :log_to_stdout        # Default is true
@@ -45,8 +47,8 @@ module JiraProfiler
     attr_accessor :rolling_log_limit    # Default is false, but any positive integer can be passed
     attr_accessor :growl_on_error       # Default is false
 
-    attr_writer   :app_name             # Name of app
-    attr_writer   :output_file          # Filename of data export
+    attr_accessor :jira_un_env_key      # Default is JIRA_UN
+    attr_accessor :jira_pw_env_key      # Default is JIRA_PW
 
     # Specify the configuration defaults and support configuration via hash .configuration.new(config_hash)
     def initialize(options={})
@@ -66,7 +68,8 @@ module JiraProfiler
       @rolling_log_limit    = options[:rolling_log_limit]    || false
       @growl_on_error       = options[:growl_on_error]       || false
 
-      @log_level = @log_level.to_sym unless @log_level.nil?
+      @jira_un_env_key      = options[:jira_un_env_key]      || 'JIRA_UN'
+      @jira_pw_env_key      = options[:jira_pw_env_key]      || 'JIRA_PW'
 
     end
 

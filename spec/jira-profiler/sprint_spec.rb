@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe JiraProfiler::Team do
+describe JiraProfiler::Sprint do
 
   describe '.initialize' do
-    it "should fetch the team details from Jira" do
+    it "should capture details about a sprint" do
       pending
     end
   end
