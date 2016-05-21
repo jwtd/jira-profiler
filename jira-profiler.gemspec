@@ -39,6 +39,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'logging', '~> 2.1.0'
   spec.add_dependency 'httparty'
   spec.add_dependency 'httparty-filecache'
+  spec.add_dependency 'thor'
   spec.add_dependency 'time_difference'
 
 end
