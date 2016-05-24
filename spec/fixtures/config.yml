@@ -1,5 +1,4 @@
 language: ruby
-app_name:
 output_file:
 log_level: info
 trace_exceptions: false

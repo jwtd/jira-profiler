@@ -55,7 +55,7 @@ module JiraProfiler
     # Specify the configuration defaults and support configuration via hash .configuration.new(config_hash)
     def initialize(options={})
       options={} unless options
-
+      
       @config_file          = options[:config]
       @app_name             = options[:app_name]
       @output_file          = options[:output_file]
@@ -72,7 +72,7 @@ module JiraProfiler
 
       @jira_un_env_key      = options[:jira_un_env_key]      || 'JIRA_UN'
       @jira_pw_env_key      = options[:jira_pw_env_key]      || 'JIRA_PW'
-      @use_cache            = options[:use_cache]                || true
+      @use_cache            = options[:use_cache]            || true
 
     end
 
@@ -86,12 +86,11 @@ module JiraProfiler
 
     # File constructor
     def self.from_yaml_file(config_filename)
-      # Make sure configuration file exists
       config_filepath = File.join(Dir.pwd, config_filename)
       unless File.exist?(config_filepath)
         raise "Configuration file does not exist #{config_filepath}"
       else
-        self.new(YAML.load_file(config_filepath))
+        self.new(YAML.load_file(config_filepath).deep_symbolize_keys)
       end
     end
 

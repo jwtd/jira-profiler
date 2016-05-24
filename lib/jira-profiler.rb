@@ -3,6 +3,9 @@ module JiraProfiler
   class JiraProfilerError < ::Exception; end
 end
 
+require "jira-profiler/core_extensions/object"
+Object.include CoreExtensions::Object
+
 require "jira-profiler/core_extensions/string"
 String.include CoreExtensions::String
 
