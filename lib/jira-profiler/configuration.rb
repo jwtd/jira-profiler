@@ -49,6 +49,8 @@ module JiraProfiler
 
     attr_accessor :jira_un_env_key      # Default is JIRA_UN
     attr_accessor :jira_pw_env_key      # Default is JIRA_PW
+    attr_accessor :use_cache            # Default is true
+
 
     # Specify the configuration defaults and support configuration via hash .configuration.new(config_hash)
     def initialize(options={})
@@ -70,6 +72,7 @@ module JiraProfiler
 
       @jira_un_env_key      = options[:jira_un_env_key]      || 'JIRA_UN'
       @jira_pw_env_key      = options[:jira_pw_env_key]      || 'JIRA_PW'
+      @use_cache            = options[:use_cache]                || true
 
     end
 

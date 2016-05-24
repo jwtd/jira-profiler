@@ -36,7 +36,7 @@ describe JiraProfiler do
 
   describe "#from_yaml_file" do
     it "should construct the correct output file name from the app name" do
-      c = JiraProfiler.configure_from_hash({:app_name => 'Foo App'})
+      c = JiraProfiler.from_yaml_file('../fixtures/config.yml')
       expect(c.app_name).to eq 'Foo App'
       expect(c.output_file).to eq 'foo-app_output'
     end
