@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'codeclimate-test-reporter'
 
   # Runtime dependencies
+  spec.add_dependency 'activesupport'
   spec.add_dependency 'logging', '~> 2.1.0'
   spec.add_dependency 'httparty'
   spec.add_dependency 'httparty-filecache'

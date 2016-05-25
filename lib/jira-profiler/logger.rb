@@ -163,13 +163,13 @@ module JiraProfiler
       @logger ||= JiraProfiler::Logger.logger(self)
     end
 
-    def self.logger(klass=nil)
-      @logger ||= self.configure_logger_for(klass.class.name)
+    def self.logger(klass)
+      self.configure_logger_for(klass)
     end
 
-    def self.configure_logger_for(classname)
+    def self.configure_logger_for(klass)
       JiraProfiler.configure_global_logger() unless JiraProfiler.global_logger_configured?
-      Logging.logger[classname]
+      Logging.logger[klass]
     end
 
   end

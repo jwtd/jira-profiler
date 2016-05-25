@@ -1,4 +1,5 @@
 # Reference: http://brandonhilkert.com/blog/ruby-gem-configuration-patterns/
+require 'active_support/all'
 
 module JiraProfiler
 
@@ -90,7 +91,7 @@ module JiraProfiler
       unless File.exist?(config_filepath)
         raise "Configuration file does not exist #{config_filepath}"
       else
-        self.new(YAML.load_file(config_filepath).deep_symbolize_keys)
+        self.new(YAML.load_file(config_filepath).symbolize_keys)
       end
     end
 

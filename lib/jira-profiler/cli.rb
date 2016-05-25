@@ -47,7 +47,7 @@ module JiraProfiler
         HTTParty::HTTPCache.cache = @@cache
         HTTParty::HTTPCache.perform_caching = JiraProfiler.configuration.use_cache
         HTTParty::HTTPCache.logger = JiraProfiler::Logger.logger(HTTParty::HTTPCache)
-        HTTParty::HTTPCache.timeout_length = 0 # seconds
+        HTTParty::HTTPCache.timeout_length = 10 # seconds
         HTTParty::HTTPCache.cache_stale_backup_time = 0 # minutes
         HTTParty::HTTPCache.exception_callback = lambda { |exception, api_name, url|
           logger.error "#{api_name}::#{url} returned #{exception}"
@@ -56,7 +56,6 @@ module JiraProfiler
 
       # Setup for all commands
       def profile_project
-        logger.info "Profiling project #{options[:project]}"
         p = Project.new(options[:project])
       end
 
