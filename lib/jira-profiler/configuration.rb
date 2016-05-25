@@ -55,12 +55,12 @@ module JiraProfiler
     # Specify the configuration defaults and support configuration via hash .configuration.new(config_hash)
     def initialize(options={})
       options={} unless options
-      
+
       @config_file          = options[:config]
       @app_name             = options[:app_name]
       @output_file          = options[:output_file]
 
-      @log_level            = options[:log_level]            || :info
+      @log_level            = options[:log_level]            || :debug
       @trace_exceptions     = options[:trace_exceptions]     || true
       @log_to_stdout        = options[:log_to_stdout]        || true
       @stdout_colors        = options[:stdout_colors]        || :for_dark_background

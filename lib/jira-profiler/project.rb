@@ -13,6 +13,7 @@ module JiraProfiler
       # Loop over all views
       rapid_views = self.class.get("/rest/greenhopper/1.0/rapidview")
       rapid_views['views'].each do |v|
+        logger.debug "Checking view: #{v}"
         if (v['name'] == project_name)
           puts "Initializing view #{v['name']}"
           @id = v['id']
