@@ -11,6 +11,7 @@ module JiraProfiler
       attr_reader :args, :options
 
       def profile(args, options)
+        logger.debug "Start profile - args: #{args.inspect}, options: #{options.inspect}"
         @args    = args
         @options = options
         initialize_cli
@@ -56,7 +57,10 @@ module JiraProfiler
 
       # Setup for all commands
       def profile_project
-        p = Project.new(options[:project])
+        puts "options.project: #{options.project}"
+        p = Project.new(options.project)
+        s = p.sprints
+        i = p.issues
       end
 
     end

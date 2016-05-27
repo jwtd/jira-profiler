@@ -1,6 +1,8 @@
+require 'pp'
+
 module JiraProfiler
 
-  class Sprint
+  class Sprint < JiraApiBase
     include Logger
 
     attr_reader :id, :name, :current_state, :start_date, :end_date, :complete_date,
@@ -18,7 +20,7 @@ module JiraProfiler
       jira_sprint = self.class.get("/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=#{@project_board_id}&sprintId=#{@id}")
       metadata = jira_sprint['sprint']
       contents = jira_sprint['contents']
-
+pp contents
       # Pulled in stories have to be queried separately
       pulled_in_issues = contents['issueKeysAddedDuringSprint']
       pulled_in_pts    = 0
@@ -28,19 +30,32 @@ module JiraProfiler
         pulled_in_pts += pts
       end
 
+      # "issuesCompletedInAnotherSprint"=>[],
+      #     "completedIssuesInitialEstimateSum"=>{"text"=>"null"},
+      #     "completedIssuesEstimateSum"=>{"text"=>"null"},
+      #     "issuesNotCompletedInitialEstimateSum"=>{"value"=>1.0, "text"=>"1.0"},
+      #     "issuesNotCompletedEstimateSum"=>{"value"=>1.0, "text"=>"1.0"},
+      #     "allIssuesEstimateSum"=>{"value"=>1.0, "text"=>"1.0"},
+      #     "puntedIssuesInitialEstimateSum"=>{"text"=>"null"},
+      #     "puntedIssuesEstimateSum"=>{"text"=>"null"},
+      #     "issuesCompletedInAnotherSprintInitialEstimateSum"=>{"text"=>"null"},
+      #     "issuesCompletedInAnotherSprintEstimateSum"=>{"text"=>"null"},
+      #     "issueKeysAddedDuringSprint"=>{"WS-132"=>true}}
+
+
       # Save sprint metadata
       @name              = metadata['name']
       @current_state     = metadata['state']
-      @start_date        = Date.parse(md["startDate"]) unless md["startDate"] == 'None'        # "09/Jun/15 2:47 PM"
-      @end_date          = Date.parse(md["endDate"]) unless md["endDate"] == 'None'            # "22/Jun/15 2:47 PM"
-      @complete_date     = Date.parse(md["completeDate"]) unless md["completeDate"] == 'None' # "None"
+      @start_date        = Date.parse(metadata["startDate"]) unless metadata["startDate"] == 'None'        # "09/Jun/15 2:47 PM"
+      @end_date          = Date.parse(metadata["endDate"]) unless metadata["endDate"] == 'None'            # "22/Jun/15 2:47 PM"
+      @complete_date     = Date.parse(metadata["completeDate"]) unless metadata["completeDate"] == 'None' # "None"
       @completed_issues  = contents['completedIssues']
       @incomplete_issues = contents['incompletedIssues']
       @punted_issues     = contents['puntedIssues']
       @pulled_in_issues  = contents['issueKeysAddedDuringSprint']
       @all_pts           = contents['allIssuesEstimateSum']['value'].to_f
       @completed_pts     = contents['completedIssuesEstimateSum']['value'].to_f
-      @incomplete_pts    = contents['incompletedIssuesEstimateSum']['value'].to_f
+      @incomplete_pts    = contents['issuesNotCompletedEstimateSum']['value'].to_f
       @punted_pts        = contents['puntedIssuesEstimateSum']['value'].to_f
       @pulled_in_pts     = pulled_in_pts
 

@@ -13,6 +13,7 @@ require 'bundler/setup'
 require 'commander/import'
 
 require 'jira-profiler'
+require 'pp'
 
 program :name, 'jira'
 program :version, '0.0.1'
@@ -26,9 +27,7 @@ command :profile do |c|
   c.option '-p', '--project PROJECT', String, 'Specify a Jira project name'
   c.action do |args, options|
     # Do something or c.when_called Jira-profiler::Commands::Profile
-
     JiraProfiler::Cli.profile(args, options)
-
   end
 end
 

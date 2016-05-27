@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'pp'
 
 module JiraProfiler
 
@@ -8,13 +9,12 @@ module JiraProfiler
     attr_reader :id, :name
 
     def initialize(project_name)
-      logger.info "Initializing project #{project_name}"
+      logger.info "Initializing project '#{project_name}'"
       @id   = nil
       @name = project_name
 
       # Prepare a reference object to store result
-      @sprints = ActiveSupport::OrderedHash.new()
-      @sprint_start_dates = {}
+      @sprints = nil
 
       # Loop over all views
       rapid_views = self.class.get("/rest/greenhopper/1.0/rapidview")
@@ -29,20 +29,52 @@ module JiraProfiler
     end
 
 
-    def sprints
-      # Lazy load by looping over all sprints
-      @sprints unless @sprint_order.empty?
-      rapid_view['sprints'].each do |sprint|
-        sprint = Sprint.new(@project_board_id, s['id'])
-        @sprints[sprint.name] = sprint
-        @sprint_start_dates[sprint.start_date.strftime('%Y-%m-%d')] = sprint.name
-      end
-      @sprints
+    def rapid_view
+      self.class.get("/rest/greenhopper/1.0/sprintquery/#{id}")
     end
 
 
-    def rapid_view
-      self.class.get("/rest/greenhopper/1.0/sprintquery/#{@project_board_id}")
+    def sprints
+      # Lazy load by looping over all sprints
+      @sprints unless @sprint.nil?
+      @sprints = ActiveSupport::OrderedHash.new()
+      rapid_view['sprints'].each do |item|
+        sprint = Sprint.new(id, item['id'])
+        @sprints[sprint.name] = sprint
+      end
+    end
+
+
+    # Returns all issues in project
+    def issues
+      @issues unless @issues.nil?
+      @issues = {}
+      max_result = 3
+      jql = "/rest/api/2/search?jql=project=\"#{@name}\" AND issuetype NOT IN (Epic, Sub-task)&expand=changelog&maxResults=#{max_result}"
+      r = self.class.get("#{jql}&startAt=0")
+puts jql
+      pp r
+exit
+      pages = (r['total'] / max_result)
+      (0..pages).each do |p|
+        begin
+          # If you can get the latest version of the last page, do so, otherwise load the cached version
+          query = "#{jql}&startAt=#{(p * max_result)}"
+          if p == pages
+            r = self.class.get(query)
+          else
+            r = CACHE.find_or_get(self.class, query)
+          end
+          r['issues'].each do |issue|
+            # Cast raw response to Issue(), passing project reference into constructor
+            issue['project'] = self
+            @issues[issue['key']] = Issue.new(issue)
+          end
+        rescue
+          puts "Unable to retrieve last page from cache or source: #{query}"
+        end
+      end
+      @issues
     end
 
 
