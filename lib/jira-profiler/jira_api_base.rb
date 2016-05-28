@@ -11,6 +11,14 @@ module JiraProfiler
                ENV.fetch(JiraProfiler.configuration.jira_pw_env_key)
     caches_api_responses :key_name => "desk", :expire_in => 0
 
+    def without_cache(&block)
+      logger.debug "Without cache"
+      HTTParty::HTTPCache.perform_caching = false
+      yield
+      HTTParty::HTTPCache.perform_caching = true
+      logger.debug "Resume with cache"
+    end
+
   end
 
 end

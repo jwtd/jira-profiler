@@ -50,20 +50,17 @@ module JiraProfiler
       @issues unless @issues.nil?
       @issues = {}
       max_result = 3
-      jql = "/rest/api/2/search?jql=project=\"#{@name}\" AND issuetype NOT IN (Epic, Sub-task)&expand=changelog&maxResults=#{max_result}"
-      r = self.class.get("#{jql}&startAt=0")
-puts jql
-      pp r
-exit
+      jql = "/rest/api/2/search?jql=project=\"#{name}\" AND issuetype NOT IN (Epic, Sub-task)&expand=changelog&maxResults=#{max_result}"
+      without_cache{ r = self.class.get("#{jql}&startAt=0") }
       pages = (r['total'] / max_result)
-      (0..pages).each do |p|
+      (0..pages).each do |current_page|
         begin
           # If you can get the latest version of the last page, do so, otherwise load the cached version
           query = "#{jql}&startAt=#{(p * max_result)}"
-          if p == pages
-            r = self.class.get(query)
+          if current_page == pages
+            without_cache{ r = self.class.get(query) }
           else
-            r = CACHE.find_or_get(self.class, query)
+            r = self.class.get(query)
           end
           r['issues'].each do |issue|
             # Cast raw response to Issue(), passing project reference into constructor
