@@ -20,7 +20,6 @@ module JiraProfiler
       jira_sprint = self.class.get("/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=#{@project_board_id}&sprintId=#{@id}")
       metadata = jira_sprint['sprint']
       contents = jira_sprint['contents']
-pp contents
       # Pulled in stories have to be queried separately
       pulled_in_issues = contents['issueKeysAddedDuringSprint']
       pulled_in_pts    = 0
