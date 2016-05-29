@@ -31,4 +31,17 @@ module JiraProfiler
     @vacation_log
   end
 
+  # Record of when people started and left
+  def employment_log(log_filepath)
+    @employment_ref = {}
+    data = CSV.read(log_filepath, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all})
+    data.each do |r|
+      @employment_ref[r[:who]] = {
+          :started => r[:started],
+          :stopped => r[:stopped],
+          :range   => (r[:started]..r[:stopped]) # Allows the use of the === comparison
+      } unless @employment_ref.has_key?(r[:who])
+    end
+  end
+
 end
