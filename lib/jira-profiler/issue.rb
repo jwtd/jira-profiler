@@ -1,3 +1,5 @@
+require 'set'
+
 module JiraProfiler
 
   class Issue < JiraApiBase
@@ -7,8 +9,8 @@ module JiraProfiler
                 :created_at, :dev_started_at, :completed_at,
                 :reporter, :creator, :assignee,
                 :summary, :description, :epic, :epic_issue,
-                :sprints, :components, :labels, :status_durations
-    :transitions
+                :sprints, :components, :labels, :status_durations,
+                :transitions, :contributors
 
     # Given ID, Label, or json object
     def initialize(options)
@@ -44,12 +46,12 @@ module JiraProfiler
       @qa_started_at     = nil
       @completed_at      = nil
 
-      @subtasks    = nil
-      sprints      = []
-      @transitions = []
-      @transitions << Transition.new(@created_at, 'status', '', 'Open', 'Created as Open')
       @status_durations = {}
-
+      @subtasks     = nil
+      @sprints      = Set.new()
+      @contributors = Set.new()
+      @transitions  = []
+      @transitions << Transition.new(@created_at, 'status', '', 'Open', 'Created as Open')
 
       cur_sprint   = nil
       cur_assignee = nil
@@ -88,7 +90,12 @@ module JiraProfiler
             # Capture time in each state and the number of times it was in that state
             unless cur_status.nil?
               # Check if status exists. If it does update a sumation field as well.
-              @status_durations[cur_status[:name]] << {:from => cur_status[:start], :to => d, :assignee => cur_assignee, :sprint => cur_sprint}
+              @status_durations[cur_status[:name]] << {
+                  :from => cur_status[:start],
+                  :to => d,
+                  :assignee => cur_assignee,
+                  :sprint => cur_sprint
+              }
             end
 
             # If this is the first time its been put in development
@@ -99,7 +106,11 @@ module JiraProfiler
 
             # Update current status
             s = "Status changed from #{from} to #{to}"
-            cur_status = {:name => to, :start => d, :assignee => cur_assignee}
+            cur_status = {
+                :name => to,
+                :start => d,
+                :assignee => cur_assignee
+            }
             @transitions << Transition.new(d, field, from, to, s)
           end
 
@@ -109,11 +120,16 @@ module JiraProfiler
               s = "Removed from #{from}"
             else
               s = "Added to #{to}"
-              sprints << to
+              @sprints << to
             end
             cur_sprint = to
             # Capture the change in sprint so that we can filter out in-sprint vs out-of sprint time in the future
-            @status_durations[cur_status[:name]] << {:from => cur_status[:start], :to => d, :assignee => cur_assignee, :sprint => cur_sprint} unless cur_status.nil?
+            @status_durations[cur_status[:name]] << {
+                :from => cur_status[:start],
+                :to => d,
+                :assignee => cur_assignee,
+                :sprint => cur_sprint
+            } unless cur_status.nil?
             @transitions << Transition.new(d, field, from, to, s)
           end
 
@@ -130,8 +146,14 @@ module JiraProfiler
             # Capture the change in assignee
             unless cur_status.nil?
               # Check if status exists. If it does update a sumation field as well.
-              @status_durations[cur_status[:name]] << {:from => cur_status[:start], :to => d, :assignee => cur_assignee, :sprint => cur_sprint}
+              @status_durations[cur_status[:name]] << {
+                  :from => cur_status[:start],
+                  :to => d,
+                  :assignee => cur_assignee,
+                  :sprint => cur_sprint
+              }
             end
+            @contributors << cur_assignee
             @transitions << Transition.new(d, field, from, to, s)
           end
 

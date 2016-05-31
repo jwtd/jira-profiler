@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'set'
 require 'pp'
 
 module JiraProfiler
@@ -6,12 +7,13 @@ module JiraProfiler
   class Project < JiraApiBase
     include Logger
 
-    attr_reader :id, :name
+    attr_reader :id, :name, :contributors
 
     def initialize(project_name)
       logger.info "Initializing project '#{project_name}'"
       @id   = nil
       @name = project_name
+      @contributors = nil
 
       # Prepare a reference object to store result
       @sprints = nil
@@ -51,12 +53,13 @@ module JiraProfiler
       @issues = {}
       max_result = 3
       jql = "/rest/api/2/search?jql=project=\"#{name}\" AND issuetype NOT IN (Epic, Sub-task)&expand=changelog&maxResults=#{max_result}"
+      r = nil
       without_cache{ r = self.class.get("#{jql}&startAt=0") }
       pages = (r['total'] / max_result)
       (0..pages).each do |current_page|
         begin
           # If you can get the latest version of the last page, do so, otherwise load the cached version
-          query = "#{jql}&startAt=#{(p * max_result)}"
+          query = "#{jql}&startAt=#{(current_page * max_result)}"
           if current_page == pages
             without_cache{ r = self.class.get(query) }
           else
@@ -67,11 +70,22 @@ module JiraProfiler
             issue['project'] = self
             @issues[issue['key']] = Issue.new(issue)
           end
-        rescue
-          puts "Unable to retrieve last page from cache or source: #{query}"
+        # rescue => exception
+        #   puts "#{exception.message} (#{exception.class})"
+        #   pp exception.backtrace
         end
       end
       @issues
+    end
+
+
+    def contributors
+      # Lazy load by looping over all sprints
+      @contributors unless @contributors.nil?
+      @contributors = Set.new()
+      issues.each do |issue|
+        @contributors.merge(issue.contributors)
+      end
     end
 
 

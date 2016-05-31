@@ -1,3 +1,5 @@
+require 'pp'
+
 module JiraProfiler
 
   # A command line interface to retrieve the data from Jira
@@ -16,6 +18,8 @@ module JiraProfiler
         @options = options
         initialize_cli
         profile_project
+
+        @team = Team.new()
       end
 
 
@@ -59,8 +63,10 @@ module JiraProfiler
       def profile_project
         puts "options.project: #{options.project}"
         p = Project.new(options.project)
-        s = p.sprints
-        i = p.issues
+        #s = p.sprints
+        #i = p.issues
+        pp c = p.contributors
+
       end
 
     end

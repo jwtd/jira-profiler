@@ -8,7 +8,7 @@ module JiraProfiler
     def initialize(at, field, from, to, description)
       @at, @field, @description = at, field, description
       if field == 'assignee'
-        @from, @to = Team.standardize(from), Team.standardize(to)
+        @from, @to = Team.standardize_name(from), Team.standardize_name(to)
       else
         @from, @to = from, to
       end
