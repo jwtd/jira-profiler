@@ -27,20 +27,6 @@ module JiraProfiler
 
     class << self
 
-      # Facilitate normalization of all versions of a team member's name to one value
-      def standardize_name(name)
-        return @team_data['aliases'].fetch(name, name)
-      end
-
-      # Reference for team data
-      def load_team_data(log_filepath)
-        if File.exists?(team_filepath)
-          @team_data = JSON.parse(File.read(team_filepath))
-        else
-          logger.error "Could not find team data file at #{team_filepath}"
-        end
-      end
-
       # Reference of vacation time for each team member
       def load_vacation_log(log_filepath)
         @vacation_log = {}

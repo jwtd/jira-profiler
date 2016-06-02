@@ -13,7 +13,6 @@ module JiraProfiler
       logger.info "Initializing project '#{project_name}'"
       @id   = nil
       @name = project_name
-      @contributors = nil
 
       # Prepare a reference object to store result
       @sprints = nil
