@@ -21,6 +21,8 @@ module JiraProfiler
         logger.debug "Start profile - args: #{args.inspect}, options: #{options.inspect}"
         @args    = args
         @options = options
+        #TODO: Merge CLI options into configuration
+        #JiraProfiler.configuration.merge(@options)
         initialize_cli
         profile_project
       end
@@ -35,8 +37,6 @@ module JiraProfiler
         logger.info "Initializing Jira Profiler #{JiraProfiler::VERSION::STRING}"
         initialize_response_cache
         validate_required_global_settings
-        logger.debug JiraProfiler.configuration.inspect
-        load_team_data(JiraProfiler.configuration.team_data_file)
       end
 
       def validate_required_global_settings
@@ -64,20 +64,14 @@ module JiraProfiler
         }
       end
 
-      # Reference for team data
-      def load_team_data(team_filepath)
-        logger.debug team_filepath
-        if File.exists?(team_filepath)
-          @team_data = JSON.parse(File.read(team_filepath))
-        else
-          logger.error "Could not find team data file at #{team_filepath}"
-        end
-      end
+
 
       # Setup for all commands
       def profile_project
         puts "options.project: #{options.project}"
-        t = Team.new("#{options.project} Team")
+        puts "options.team_data_file: #{options.team_data_file}"
+
+        t = Team.new("#{options.team_data_file} Team")
         p = Project.new(options.project)
         #s = p.sprints
         #i = p.issues

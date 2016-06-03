@@ -36,48 +36,77 @@ module JiraProfiler
   # Define the configuration options
   class Configuration
 
-    attr_writer   :app_name             # Name of app
-    attr_writer   :output_file          # Filename of data export
-    attr_accessor :log_level            # :off, :all, :debug, :info, :warn, :error, :fatal
-    attr_accessor :trace_exceptions     # Default is true
-    attr_accessor :log_to_stdout        # Default is true
-    attr_accessor :stdout_colors        # Default is :for_dark_backgrounds, :for_light_background, or custom by passing a hash that conforms to https://github.com/TwP/logging/blob/master/examples/colorization.rb
-    attr_accessor :log_file             # Default is nil
-    attr_accessor :log_file_layout      # :basic, :json, :yaml, or a pattern such as '[%d] %-5l: %m\n'
-    attr_accessor :rolling_log_file_age # Default is false, options are false or 'daily', 'weekly', 'monthly' or an integer
-    attr_accessor :rolling_log_limit    # Default is false, but any positive integer can be passed
-    attr_accessor :growl_on_error       # Default is false
-
-    attr_accessor :jira_un_env_key      # Default is JIRA_UN
-    attr_accessor :jira_pw_env_key      # Default is JIRA_PW
-    attr_accessor :use_cache            # Default is true
-
-    attr_accessor :team_data_file
+    # attr_writer   :app_name             # Name of app
+    # attr_writer   :output_file          # Filename of data export
+    # attr_accessor :log_level            # :off, :all, :debug, :info, :warn, :error, :fatal
+    # attr_accessor :trace_exceptions     # Default is true
+    # attr_accessor :log_to_stdout        # Default is true
+    # attr_accessor :stdout_colors        # Default is :for_dark_backgrounds, :for_light_background, or custom by passing a hash that conforms to https://github.com/TwP/logging/blob/master/examples/colorization.rb
+    # attr_accessor :log_file             # Default is nil
+    # attr_accessor :log_file_layout      # :basic, :json, :yaml, or a pattern such as '[%d] %-5l: %m\n'
+    # attr_accessor :rolling_log_file_age # Default is false, options are false or 'daily', 'weekly', 'monthly' or an integer
+    # attr_accessor :rolling_log_limit    # Default is false, but any positive integer can be passed
+    # attr_accessor :growl_on_error       # Default is false
+    #
+    # attr_accessor :jira_un_env_key      # Default is JIRA_UN
+    # attr_accessor :jira_pw_env_key      # Default is JIRA_PW
+    # attr_accessor :use_cache            # Default is true
+    #
+    # attr_accessor :team_data_file
 
 
     # Specify the configuration defaults and support configuration via hash .configuration.new(config_hash)
     def initialize(options={})
-      options={} unless options
 
-      @config_file          = options[:config]
-      @app_name             = options[:app_name]
-      @output_file          = options[:output_file]
+      puts "initializing config"
 
-      @log_level            = options[:log_level]            || :debug
-      @trace_exceptions     = options[:trace_exceptions]     || true
-      @log_to_stdout        = options[:log_to_stdout]        || true
-      @stdout_colors        = options[:stdout_colors]        || :for_dark_background
-      @log_file             = options[:log_file]             || "#{app_name.to_dash_case}_log.txt"
-      @log_file_layout      = options[:log_file_layout]      || '[%d] %-5l -- %c -- %m\n'
-      @rolling_log_file_age = options[:rolling_log_file_age] || false
-      @rolling_log_limit    = options[:rolling_log_limit]    || false
-      @growl_on_error       = options[:growl_on_error]       || false
+      #options={} unless options
+      @values = {
+        :app_name         => nil,
+        :config_file      => nil,
+        :output_file      => nil,
+        :log_level        => :debug,
+        :trace_exceptions => true,
+        :log_to_stdout    => true,
+        :stdout_colors    => :for_dark_background,
+        :log_file         => "#{app_name.to_dash_case}_log.txt",
+        :log_file_layout  => '[%d] %-5l -- %c -- %m\n',
+        :growl_on_error   => false,
+        :rolling_log_limit    => false,
+        :rolling_log_file_age => false,
 
-      @jira_un_env_key      = options[:jira_un_env_key]      || 'JIRA_UN'
-      @jira_pw_env_key      = options[:jira_pw_env_key]      || 'JIRA_PW'
-      @use_cache            = options[:use_cache]            || true
-      @team_data_file       = options[:team_data_file]       || "team.json"
+        :jira_un_env_key  => 'JIRA_UN',
+        :jira_pw_env_key  => 'JIRA_PW',
+        :use_cache        => true,
+        :team_data_file   => 'team.json'
+      }.merge(options)
 
+
+      pp @values
+
+      # @config_file          = options[:config]
+      # @app_name             = options[:app_name]
+      # @output_file          = options[:output_file]
+      #
+      # @log_level            = options[:log_level]            || :debug
+      # @trace_exceptions     = options[:trace_exceptions]     || true
+      # @log_to_stdout        = options[:log_to_stdout]        || true
+      # @stdout_colors        = options[:stdout_colors]        || :for_dark_background
+      # @log_file             = options[:log_file]             || "#{app_name.to_dash_case}_log.txt"
+      # @log_file_layout      = options[:log_file_layout]      || '[%d] %-5l -- %c -- %m\n'
+      # @rolling_log_file_age = options[:rolling_log_file_age] || false
+      # @rolling_log_limit    = options[:rolling_log_limit]    || false
+      # @growl_on_error       = options[:growl_on_error]       || false
+      #
+      # @jira_un_env_key      = options[:jira_un_env_key]      || 'JIRA_UN'
+      # @jira_pw_env_key      = options[:jira_pw_env_key]      || 'JIRA_PW'
+      # @use_cache            = options[:use_cache]            || true
+      # @team_data_file       = options[:team_data_file]       || "team.json"
+
+    end
+
+    def [](field)
+      self.send field
     end
 
     def app_name
@@ -98,7 +127,40 @@ module JiraProfiler
       end
     end
 
+    def respond_to?(method_sym, include_private = false)
+      if ConfigDynamicFinderMatch.new(method_sym).match?
+        true
+      # else
+      #   super
+      end
+    end
+
+    def method_missing(method_sym, *arguments, &block)
+      if match.match?
+        define_dynamic_config_field(method_sym, match.attribute)
+        send(method_sym, arguments.first)
+      # else
+      #   super
+      end
+    end
+
+    protected
+
+    def define_dynamic_config_field(method_sym, attribute)
+      class_eval <<-RUBY
+      def #{method_sym}
+        @values[method_sym]
+      end
+
+      def #{method_sym}=(value)
+        @values[method_sym] = value
+      end
+      RUBY
+    end
+
   end
+
+
 
 end
 

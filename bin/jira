@@ -25,6 +25,7 @@ command :profile do |c|
   c.description = c.summary
   c.example 'Profile project Foo', 'jira profile --project Foo'
   c.option '-p', '--project PROJECT', String, 'Specify a Jira project name'
+  c.option '-t', '--team TEAM', String, 'Specify a path to a team data file. Default is ./team.json'
   c.action do |args, options|
     # Do something or c.when_called Jira-profiler::Commands::Profile
     JiraProfiler::Cli.profile(args, options)
