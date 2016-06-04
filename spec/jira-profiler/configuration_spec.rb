@@ -8,7 +8,7 @@ describe JiraProfiler do
 
   describe "#configure" do
 
-    it "should allow values to be set using block style" do
+    it "should allow fields to be set using block style" do
       c = JiraProfiler.configuration
       expect(c.app_name).to eq('jira-profiler')
       JiraProfiler.configure do |config|
@@ -17,12 +17,12 @@ describe JiraProfiler do
       expect(c.app_name).to eq 'Foo App'
     end
 
-    it "should allow values to be set using hash parameters" do
+    it "should allow fields to be set using hash parameters" do
       c = JiraProfiler.configure(:app_name => 'Bar App')
       expect(c.app_name).to eq 'Bar App'
     end
 
-    it "should allow values to be set using a config file" do
+    it "should allow fields to be set using a config file" do
       c = JiraProfiler.configure(:config_file => 'spec/fixtures/config.yml')
       expect(c.stdout_colors).to eq 'for_light_background'
     end
@@ -51,6 +51,30 @@ describe JiraProfiler do
       JiraProfiler.reset_configuration
       expect(c.app_name).to eq 'jira-profiler'
     end
+  end
+
+
+
+  describe JiraProfiler::Configuration do
+
+    describe ".[]" do
+      it "should allow access to fields using brackets" do
+        c = JiraProfiler.configure(:app_name => 'Foo App')
+        expect(c[:app_name]).to eq 'Foo App'
+        c[:app_name] = 'Bar App'
+        expect(c.app_name).to eq 'Bar App'
+      end
+    end
+
+    describe ".configure" do
+      it "should allow bulk updating of fields" do
+        c = JiraProfiler.configure(:app_name => 'Foo App')
+        expect(c.app_name).to eq 'Foo App'
+        c.configure(:app_name => 'Bar App')
+        expect(c.app_name).to eq 'Bar App'
+      end
+    end
+
   end
 
 end

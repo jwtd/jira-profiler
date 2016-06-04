@@ -56,6 +56,11 @@ module JiraProfiler
       @values = @@defaults.merge(options)
     end
 
+    # All buld update of configuration
+    def configure(options)
+      @values.merge!(options)
+    end
+
     # Reset configuration
     def reset
       @values = @@defaults.clone
