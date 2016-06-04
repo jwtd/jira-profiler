@@ -69,7 +69,7 @@ module JiraProfiler
         :trace_exceptions => true,
         :log_to_stdout    => true,
         :stdout_colors    => :for_dark_background,
-        :log_file         => "#{app_name.to_dash_case}_log.txt",
+        #:log_file         => "#{app_name.to_dash_case}_log.txt",
         :log_file_layout  => '[%d] %-5l -- %c -- %m\n',
         :growl_on_error   => false,
         :rolling_log_limit    => false,
@@ -109,13 +109,17 @@ module JiraProfiler
       self.send field
     end
 
-    def app_name
-      @app_name || self.to_s.gsub('#<', '').gsub(/(::.*)/, '').to_dash_case
-    end
-
-    def output_file
-      @output_file || "#{app_name.to_dash_case}_output"
-    end
+    # def app_name
+    #   return @values[:app_name] unless @values[:app_name].nil?
+    #   @values[:app_name] = @self.to_s.gsub('#<', '').gsub(/(::.*)/, '').to_dash_case
+    #   @values[:app_name]
+    # end
+    #
+    # def output_file
+    #   return @values[:output_file] unless @values[:output_file].nil?
+    #   @values[:output_file] = "#{app_name.to_dash_case}_output"
+    #   @values[:output_file]
+    # end
 
     # File constructor
     def self.from_yaml_file(config_filename)
@@ -136,17 +140,18 @@ module JiraProfiler
     end
 
     def method_missing(method_sym, *arguments, &block)
-      if match.match?
-        define_dynamic_config_field(method_sym, match.attribute)
-        send(method_sym, arguments.first)
-      # else
-      #   super
+      puts "Didn't find method for #{method_sym}"
+      if @values.has_key?(method_sym)
+        puts "@values has the key #{method_sym}"
+        define_dynamic_config_field(method_sym)
+        send(method_sym)
       end
     end
 
     protected
 
-    def define_dynamic_config_field(method_sym, attribute)
+    def define_dynamic_config_field(method_sym)
+      puts "Creating accessor for #{method_sym}"
       class_eval <<-RUBY
       def #{method_sym}
         @values[method_sym]
