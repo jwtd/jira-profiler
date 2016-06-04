@@ -12,7 +12,7 @@
 # Ignore data files
 *.csv
 *.log
-*_log.txt
+*log.txt
 
 Gemfile.lock
 .ruby-version

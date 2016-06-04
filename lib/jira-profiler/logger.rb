@@ -175,4 +175,3 @@ module JiraProfiler
   end
 
 end
-

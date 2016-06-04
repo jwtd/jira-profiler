@@ -71,11 +71,13 @@ module JiraProfiler
         puts "options.project: #{options.project}"
         puts "options.team_data_file: #{options.team_data_file}"
 
-        t = Team.new("#{options.team_data_file} Team")
-        p = Project.new(options.project)
+
+
+        #t = Team.new("#{options.team_data_file} Team")
+        #p = Project.new(options.project)
         #s = p.sprints
         #i = p.issues
-        pp c = p.contributors
+        #pp c = p.contributors
 
       end
 

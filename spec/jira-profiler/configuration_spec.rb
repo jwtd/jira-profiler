@@ -6,47 +6,50 @@ describe JiraProfiler do
     JiraProfiler.reset_configuration
   end
 
-  describe "#new" do
-    it "should construct the correct output file name from the app name" do
-      c = JiraProfiler::Configuration.new(:app_name => 'Foo App')
-      expect(c.app_name).to eq 'Foo App'
-      expect(c.output_file).to eq 'foo-app_output'
-    end
-  end
-
   describe "#configure" do
-    it "should construct the correct output file name from the app name" do
+
+    it "should allow values to be set using block style" do
       c = JiraProfiler.configuration
-      expect(c.output_file).to eq('jira-profiler_output')
+      expect(c.app_name).to eq('jira-profiler')
       JiraProfiler.configure do |config|
         config.app_name = 'Foo App'
       end
       expect(c.app_name).to eq 'Foo App'
-      expect(c.output_file).to eq 'foo-app_output'
     end
-  end
 
-  describe "#configure_from_hash" do
-    it "should construct the correct output file name from the app name" do
-      c = JiraProfiler.configure_from_hash({:app_name => 'Foo App'})
-      expect(c.app_name).to eq 'Foo App'
-      expect(c.output_file).to eq 'foo-app_output'
+    it "should allow values to be set using hash parameters" do
+      c = JiraProfiler.configure(:app_name => 'Bar App')
+      expect(c.app_name).to eq 'Bar App'
     end
-  end
 
-  describe "#from_yaml_file" do
-    it "should construct the correct output file name from the app name" do
-      c = JiraProfiler.configure_from_yaml_file('spec/fixtures/config.yml')
+    it "should allow values to be set using a config file" do
+      c = JiraProfiler.configure(:config_file => 'spec/fixtures/config.yml')
       expect(c.stdout_colors).to eq 'for_light_background'
     end
+
+  end
+
+  describe "#configuration" do
+    it "should return the default configuration" do
+      c = JiraProfiler.configuration
+      expect(c.app_name).to eq 'jira-profiler'
+    end
+
+    it "should provide access to fields with brackets" do
+      c = JiraProfiler.configuration
+      expect(c[:app_name]).to eq 'jira-profiler'
+      c[:app_name] = 'BAR'
+      expect(c[:app_name]).to eq 'BAR'
+    end
+
   end
 
   describe "#reset_configuration" do
     it "should reset the configuration" do
-      c = JiraProfiler.configure_from_hash({:app_name => 'Foo App'})
+      c = JiraProfiler.configure(:app_name => 'Foo App')
       expect(c.app_name).to eq 'Foo App'
       JiraProfiler.reset_configuration
-      expect(c.output_file).to eq 'foo-app_output'
+      expect(c.app_name).to eq 'jira-profiler'
     end
   end
 
