@@ -5,7 +5,6 @@ module JiraProfiler
 
   # Module level access to configuration
   class << self
-    attr_writer :configuration
 
     # Allow configuration by passing a hash or by using block style
     def configure(h={})
@@ -22,11 +21,13 @@ module JiraProfiler
     def configuration
       @configuration ||= Configuration.new()
     end
+    alias config configuration
 
     # Reset configuration
     def reset_configuration
       configuration.reset
     end
+
   end
 
   # Define the configuration options
@@ -57,7 +58,7 @@ module JiraProfiler
     end
 
     # All buld update of configuration
-    def configure(options)
+    def update(options)
       @values.merge!(options)
     end
 

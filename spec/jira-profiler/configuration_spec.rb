@@ -35,6 +35,11 @@ describe JiraProfiler do
       expect(c.app_name).to eq 'jira-profiler'
     end
 
+    it "should allow acces through the config alias" do
+      c = JiraProfiler.config
+      expect(c.app_name).to eq 'jira-profiler'
+    end
+
     it "should provide access to fields with brackets" do
       c = JiraProfiler.configuration
       expect(c[:app_name]).to eq 'jira-profiler'
@@ -66,11 +71,11 @@ describe JiraProfiler do
       end
     end
 
-    describe ".configure" do
+    describe ".update" do
       it "should allow bulk updating of fields" do
         c = JiraProfiler.configure(:app_name => 'Foo App')
         expect(c.app_name).to eq 'Foo App'
-        c.configure(:app_name => 'Bar App')
+        c.update(:app_name => 'Bar App')
         expect(c.app_name).to eq 'Bar App'
       end
     end
