@@ -23,7 +23,7 @@ module JiraProfiler
         logger.debug "options: #{options.inspect}"
         JiraProfiler.config.update(options.__hash__)
         logger.debug "Running with config #{JiraProfiler.config.inspect}"
-        initialize_response_cache(options)
+        initialize_response_cache()
         self.send task, args, options
       end
 
@@ -32,14 +32,14 @@ module JiraProfiler
 
 
       # Setup response cache in HTTParty
-      def initialize_response_cache(params)
+      def initialize_response_cache(params={})
         param = {
          :use_cache    => JiraProfiler.config.use_cache,
          :cache_domain => JiraProfiler.config.app_name,
          :cache_dir    => './http-response-cache',
          :timeout_length         => 10, # seconds
          :cache_stale_backup_time => 0  # minutes
-        }.merge(params.__hash__)
+        }.merge(params)
         logger.info "HTTParty::HTTPCache = #{param[:use_cache]}"
 
         # Create a file system based cache
@@ -61,10 +61,13 @@ module JiraProfiler
         puts "options.project: #{options.project}"
         puts "options.team_data_file: #{options.team_data_file}"
 
-
-
+        # Create team and get project data
         #t = Team.new("#{options.team_data_file} Team")
         #p = Project.new(options.project)
+
+        # Loop over each issue in the project
+
+
         #s = p.sprints
         #i = p.issues
         #pp c = p.contributors
