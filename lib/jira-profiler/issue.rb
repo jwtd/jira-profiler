@@ -5,12 +5,15 @@ module JiraProfiler
   class Issue < JiraApiBase
     include Logger
 
-    attr_reader :project, :id, :key, :type, :status, :status_cat,
+    attr_reader :project, :id, :key, :type, :status, :@statuses, :status_cat,
                 :created_at, :dev_started_at, :completed_at,
                 :reporter, :creator, :assignee,
-                :summary, :description, :epic, :epic_issue,
-                :sprints, :components, :labels, :status_durations,
+                :summary, :description,
+                :epic, :epic_issue,
+                :sprints, :components, :labels,
                 :transitions, :contributors
+
+    StatusIteration = Struct.new(:start_date, :end_date, :assignee, :sprint)
 
     # Given ID, Label, or json object
     def initialize(options)
@@ -40,125 +43,33 @@ module JiraProfiler
       @epic        = f['epicField']['text'] if f['epicField']
       @epic_issue  = f['epic'] if f['epic']
 
-      @created_at        = DateTime.parse(f['created'])
-      @dev_started_at    = nil
-      @review_started_at = nil
-      @qa_started_at     = nil
-      @completed_at      = nil
-
-      @status_durations = {}
+      # Associations
       @subtasks     = nil
       @sprints      = Set.new()
       @contributors = Set.new()
-      @transitions  = []
-      @transitions << Transition.new(@created_at, 'status', '', 'Open', 'Created as Open')
 
-      cur_sprint   = nil
-      cur_assignee = nil
-      cur_status   = nil
+      # History & Stats
+      @created_at  = DateTime.parse(f['created'])
+      @statuses    = {:last => nil}
+      @transitions = []
+      @cur_sprint   = nil
+      @cur_assignee = nil
+      @cur_status   = nil
 
+      # Step through the issue's history and record transitions
+      add_transition(@created_at, 'status', 'Open', 'Created as Open')
+
+      # Analyze the history
       log = jira_issue['changelog']['histories'].each do |h|
-
         h['items'].each do |event|
-
-          d     = DateTime.parse(h['created'])
+          d     = DateTime.parse(event['created'])
           field = event['field']
           from  = event['fromString']
           to    = event['toString']
-
-          # Track changes in issue status
-          if field == 'status'
-
-            # Add status if it doesn't exist
-            @status_durations[to] = [] unless @status_durations.has_key?(to)
-
-            # If this is the first time its been put in development
-            if (to == 'In Development' and @dev_started_at.nil?)
-              @dev_started_at = d
-            end
-
-            # If this is the first time its been put in review
-            if (to == 'In Review' and @review_started_at.nil?)
-              @review_started_on = d
-            end
-
-            # If this is the first time its been put in QA
-            if (to == 'In QA' and @qa_started_at.nil?)
-              @qa_started_at = d
-            end
-
-            # Capture time in each state and the number of times it was in that state
-            unless cur_status.nil?
-              # Check if status exists. If it does update a sumation field as well.
-              @status_durations[cur_status[:name]] << {
-                  :from => cur_status[:start],
-                  :to => d,
-                  :assignee => cur_assignee,
-                  :sprint => cur_sprint
-              }
-            end
-
-            # If this is the first time its been put in development
-            if (to == 'Closed' or to == 'Resolved')
-              @end_dev = d
-              @completed_at = d
-            end
-
-            # Update current status
-            s = "Status changed from #{from} to #{to}"
-            cur_status = {
-                :name => to,
-                :start => d,
-                :assignee => cur_assignee
-            }
-            @transitions << Transition.new(d, field, from, to, s)
-          end
-
-          # Track sprint inclusion / ejection
-          if field == 'Sprint'
-            if to.nil?
-              s = "Removed from #{from}"
-            else
-              s = "Added to #{to}"
-              @sprints << to
-            end
-            cur_sprint = to
-            # Capture the change in sprint so that we can filter out in-sprint vs out-of sprint time in the future
-            @status_durations[cur_status[:name]] << {
-                :from => cur_status[:start],
-                :to => d,
-                :assignee => cur_assignee,
-                :sprint => cur_sprint
-            } unless cur_status.nil?
-            @transitions << Transition.new(d, field, from, to, s)
-          end
-
-          # Track changes in story points
-          if field == 'Story Points'
-            s = "Size changed from #{from} to #{to} points"
-            @transitions << Transition.new(d, field, from, to, s)
-          end
-
-          # Track the developer
-          if field == 'assignee'
-            s = "Assignee from #{from} to #{to}"
-            cur_assignee = to
-            # Capture the change in assignee
-            unless cur_status.nil?
-              # Check if status exists. If it does update a sumation field as well.
-              @status_durations[cur_status[:name]] << {
-                  :from => cur_status[:start],
-                  :to => d,
-                  :assignee => cur_assignee,
-                  :sprint => cur_sprint
-              }
-            end
-            @contributors << cur_assignee
-            @transitions << Transition.new(d, field, from, to, s)
-          end
-
+          add_transition(d, field, from, to)
         end
       end
+
     end
 
     # Returns all subtasks beloning to a project
@@ -174,22 +85,61 @@ module JiraProfiler
       @subtasks
     end
 
-    # Calculate time in each state
-    def time_from_open2close
-      difference_in_hours(s, dev_end) unless dev_end.nil? or dev_start.nil?
+    # How much time was spent in each of the statuses
+    def accumulated_time_in_status(status, assignee = :all)
+      @statuses[status][:itterationsv].inject(0) do |sum, i|
+        (i.assignee == :all or i.assignee == assignee) ? sum + i.elapsed_time : sum
+      end
     end
 
-    def time_in_development
-      difference_in_hours(dev_start, dev_end)
+    # How much time passed between the first time a status was set and the last time
+    def elapsed_time_in_status(status)
+      difference_in_hours(statuses[status].first.start_time, statuses[status].last.end_time)
     end
 
-    def time_in_review
-      difference_in_hours(dev_start, dev_end)
+
+    private
+
+
+    def add_transition(d, field, from, to)
+
+      # Track changes in issue status
+      if field == 'status'
+        # Set the ending date of the last status
+        statuses[from].last[:end_date] = date if @statuses.has_key(from)
+        # Add status if it doesn't exist
+        statuses[to] = [] unless @statuses.has_key(to)
+        statuses[to] << StatusIteration.new(date, nil, @cur_assignee, @cur_sprint)
+        @transitions << Transition.new(self, d, field, from, to, "Status changed from #{from} to #{to}")
+      end
+
+      # Track sprint inclusion / ejection
+      if field == 'Sprint'
+        if to.nil?
+          s = "Removed from #{from}"
+        else
+          s = "Added to #{to}"
+          @sprints << to
+        end
+        # Capture the change in sprint so that we can filter out in-sprint vs out-of sprint time in the future
+        @cur_sprint = to
+        @transitions << Transition.new(self, d, field, from, to, s)
+      end
+
+      # Track changes in story points
+      if field == 'Story Points'
+        @transitions << Transition.new(self, d, field, from, to, "Size changed from #{from} to #{to} points")
+      end
+
+      # Track the developer
+      if field == 'assignee'
+        @cur_assignee = to
+        @contributors << cur_assignee
+        @transitions << Transition.new(self, d, field, from, to, "Assignee from #{from} to #{to}")
+      end
+
     end
 
-    def time_in_qa
-      difference_in_hours(dev_start, dev_end)
-    end
 
   end
 

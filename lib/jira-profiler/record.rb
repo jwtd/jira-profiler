@@ -4,40 +4,26 @@ module JiraProfiler
   class Record
     include Logger
 
-    attr_reader :label, :unit_of_time, :start_date, :end_date
+    attr_reader :unit_of_time, :start_date, :end_date
 
-    def initialize(label, unit_of_time, start_date, end_date)
-      label        =
-      unit_of_time =
-      start_date   =
-      end_date     =
+    def initialize(unit_of_time, start_date, end_date)
+      @unit_of_time = :day
+      @start_date   = start_date
+      @end_date     = end_date
+      @fields = []
+      @values = []
     end
 
-    # Capture and measure the item
-    def assignments
+    def fields()
+      # statuses
+      #   time in
+      # created, updated, assigned, transitioned
     end
 
-    def issues
+    def values()
     end
 
-    # Epcis, stories, defects, tasks
-    def issue_types
-    end
-
-    # Time spent in each status
-    def statuses
-    end
-
-    def created
-    end
-
-    def assigned
-    end
-
-    def updated
-    end
-
-    def closed
+    def row()
     end
 
   end
