@@ -4,18 +4,13 @@ module JiraProfiler
 
   # A command line interface to retrieve the data from Jira
 
-  # Facilitate normalization of all versions of a team member's name to one value
-  def self.standardize_name(name)
-    return @team_data['aliases'].fetch(name, name)
-  end
-
   class Cli
 
     class << self
 
       include Logger
 
-      attr_reader :args, :options
+      attr_reader :args, :options, :team
 
       def run(task, args, options)
         logger.debug "Run #{JiraProfiler.config.app_name} #{JiraProfiler::VERSION::STRING} command #{task}"
@@ -25,6 +20,11 @@ module JiraProfiler
         logger.debug "Running with config #{JiraProfiler.config.inspect}"
         initialize_response_cache()
         self.send task, args, options
+      end
+
+      # Facilitate normalization of all versions of a team member's name to one value
+      def standardize_name(name)
+        @team.nil? ? name : @team.standardize_name(name)
       end
 
 
@@ -40,6 +40,8 @@ module JiraProfiler
          :timeout_length         => 10, # seconds
          :cache_stale_backup_time => 0  # minutes
         }.merge(params)
+
+        logger.debug "HTTParty::HTTPCache params = #{param.inspect}"
         logger.info "HTTParty::HTTPCache = #{param[:use_cache]}"
 
         # Create a file system based cache
@@ -58,18 +60,16 @@ module JiraProfiler
 
       # Setup for all commands
       def profile(args, options)
-        puts "options.project: #{options.project}"
-        puts "options.team_data_file: #{options.team_data_file}"
-
         # Create team and get project data
-        #t = Team.new("#{options.team_data_file} Team")
-        #p = Project.new(options.project)
+        @team = Team.new("#{options.project} Team", options.team_data_file)
+        p = Project.new(options.project)
+        fi = p.issues.first
+        puts "fi.statuses: #{fi.statuses}"
+        puts "fi.accumulated_time_in_status: #{fi.accumulated_time_in_status()}"
+        puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status()}"
 
         # Loop over each issue in the project
-
-
         #s = p.sprints
-        #i = p.issues
         #pp c = p.contributors
 
       end

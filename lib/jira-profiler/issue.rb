@@ -5,7 +5,7 @@ module JiraProfiler
   class Issue < JiraApiBase
     include Logger
 
-    attr_reader :project, :id, :key, :type, :status, :@statuses, :status_cat,
+    attr_reader :project, :id, :key, :type, :status, :statuses, :status_history, :status_cat,
                 :created_at, :dev_started_at, :completed_at,
                 :reporter, :creator, :assignee,
                 :summary, :description,
@@ -29,9 +29,9 @@ module JiraProfiler
       f = jira_issue['fields']
 
       # Get issues metadata
-      @project     = jira_issue['project']
       @id          = jira_issue['id']
       @key         = jira_issue['key']
+      @project     = f['project']['name']
       @type        = f['issuetype']['name']
       @reporter    = f['reporter']['displayName']
       @creator     = f['creator']['displayName']
@@ -44,14 +44,16 @@ module JiraProfiler
       @epic_issue  = f['epic'] if f['epic']
 
       # Associations
+      @comments     = f['comment']['comments'] if f['comment']
       @subtasks     = nil
       @sprints      = Set.new()
       @contributors = Set.new()
 
       # History & Stats
       @created_at  = DateTime.parse(f['created'])
-      @statuses    = {:last => nil}
-      @transitions = []
+      @statuses       = Set.new()
+      @status_history = {}
+      @transitions  = []
       @cur_sprint   = nil
       @cur_assignee = nil
       @cur_status   = nil
@@ -61,12 +63,12 @@ module JiraProfiler
 
       # Analyze the history
       log = jira_issue['changelog']['histories'].each do |h|
+        date = DateTime.parse(h['created'])
         h['items'].each do |event|
-          d     = DateTime.parse(event['created'])
           field = event['field']
           from  = event['fromString']
           to    = event['toString']
-          add_transition(d, field, from, to)
+          add_transition(date, field, from, to)
         end
       end
 
@@ -87,7 +89,7 @@ module JiraProfiler
 
     # How much time was spent in each of the statuses
     def accumulated_time_in_status(status, assignee = :all)
-      @statuses[status][:itterationsv].inject(0) do |sum, i|
+      status_history[status][:itterationsv].inject(0) do |sum, i|
         (i.assignee == :all or i.assignee == assignee) ? sum + i.elapsed_time : sum
       end
     end
@@ -101,16 +103,17 @@ module JiraProfiler
     private
 
 
-    def add_transition(d, field, from, to)
+    def add_transition(date, field, from, to)
 
       # Track changes in issue status
       if field == 'status'
         # Set the ending date of the last status
-        statuses[from].last[:end_date] = date if @statuses.has_key(from)
+        status_history[from].last[:end_date] = date if status_history.has_key?(from)
         # Add status if it doesn't exist
-        statuses[to] = [] unless @statuses.has_key(to)
-        statuses[to] << StatusIteration.new(date, nil, @cur_assignee, @cur_sprint)
-        @transitions << Transition.new(self, d, field, from, to, "Status changed from #{from} to #{to}")
+        statuses << to
+        status_history[to] = [] unless status_history.has_key?(to)
+        status_history[to] << StatusIteration.new(date, nil, @cur_assignee, @cur_sprint)
+        @transitions << Transition.new(self, date, field, from, to, "Status changed from #{from} to #{to}")
       end
 
       # Track sprint inclusion / ejection
@@ -123,19 +126,19 @@ module JiraProfiler
         end
         # Capture the change in sprint so that we can filter out in-sprint vs out-of sprint time in the future
         @cur_sprint = to
-        @transitions << Transition.new(self, d, field, from, to, s)
+        @transitions << Transition.new(self, date, field, from, to, s)
       end
 
       # Track changes in story points
       if field == 'Story Points'
-        @transitions << Transition.new(self, d, field, from, to, "Size changed from #{from} to #{to} points")
+        @transitions << Transition.new(self, date, field, from, to, "Size changed from #{from} to #{to} points")
       end
 
       # Track the developer
       if field == 'assignee'
         @cur_assignee = to
-        @contributors << cur_assignee
-        @transitions << Transition.new(self, d, field, from, to, "Assignee from #{from} to #{to}")
+        @contributors << to
+        @transitions << Transition.new(self, date, field, from, to, "Assignee from #{from} to #{to}")
       end
 
     end

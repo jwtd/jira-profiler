@@ -4,26 +4,24 @@ module JiraProfiler
   class Record
     include Logger
 
-    attr_reader :unit_of_time, :start_date, :end_date
+    attr_reader :unit_of_time, :start_date, :end_date, :fields, :values
 
     def initialize(unit_of_time, start_date, end_date)
       @unit_of_time = :day
       @start_date   = start_date
       @end_date     = end_date
-      @fields = []
-      @values = []
+      @data = {}
     end
 
     def fields()
       # statuses
       #   time in
       # created, updated, assigned, transitioned
+      @data.keys()
     end
 
     def values()
-    end
-
-    def row()
+      @data.keys()
     end
 
   end

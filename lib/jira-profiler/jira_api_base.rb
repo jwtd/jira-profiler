@@ -13,9 +13,9 @@ module JiraProfiler
 
     def without_cache(&block)
       logger.debug "Without cache"
-      HTTParty::HTTPCache.perform_caching = false
+      #HTTParty::HTTPCache.perform_caching = false
       yield
-      HTTParty::HTTPCache.perform_caching = true
+      #HTTParty::HTTPCache.perform_caching = true
       logger.debug "Resume with cache"
     end
 

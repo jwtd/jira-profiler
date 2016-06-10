@@ -10,28 +10,34 @@ module JiraProfiler
 
     def initialize(name, team_data_filepath = nil)
 
-      @@name           = name
-      @@members        = {}
-      @@team_data      = {'aliases' => nil}
-      @@vacation_log   = nil
-      @@employment_log = nil
+      @name           = name
+      @members        = {}
+      @team_data      = {'aliases' => {}}
+      @vacation_log   = nil
+      @employment_log = nil
 
       if team_data_filepath.nil?
         logger.debug "No team data file provided"
       else
-        Team.load_team_data(team_data_filepath)
-        Team.load_vacation_log(team_data_filepath)
-        Team.load_employment_log(team_data_filepath)
+        load_team_data(team_data_filepath)
+        #Team.load_vacation_log(team_data_filepath)
+        #Team.load_employment_log(team_data_filepath)
       end
+    end
+
+    # Facilitate normalization of all versions of a team member's name to one value
+    def standardize_name(name)
+      @team_data['aliases'].fetch(name, name)
     end
 
     # Reference for team data
     def load_team_data(team_filepath)
-      logger.debug team_filepath
-      if File.exists?(team_filepath)
-        @team_data = JSON.parse(File.read(team_filepath))
+      path = File.expand_path(File.join('../../', team_filepath), __dir__)
+      if File.exists?(path)
+        logger.error "Loading team data from #{path}"
+        @team_data = JSON.parse(File.read(path))
       else
-        logger.error "Could not find team data file at #{team_filepath}"
+        logger.error "Could not find team data file at #{path}"
       end
     end
 

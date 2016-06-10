@@ -1,0 +1,2201 @@
+{
+  "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+  "id": "26336",
+  "self": "https://virtru.atlassian.net/rest/api/2/issue/26336",
+  "key": "WS-3531",
+  "fields": {
+    "issuetype": {
+      "self": "https://virtru.atlassian.net/rest/api/2/issuetype/7",
+      "id": "7",
+      "description": "gh.issue.story.desc",
+      "iconUrl": "https://virtru.atlassian.net/secure/viewavatar?size=xsmall&avatarId=11515&avatarType=issuetype",
+      "name": "Story",
+      "subtask": false,
+      "avatarId": 11515
+    },
+    "timespent": null,
+    "project": {
+      "self": "https://virtru.atlassian.net/rest/api/2/project/11300",
+      "id": "11300",
+      "key": "WS",
+      "name": "Web Stack",
+      "avatarUrls": {
+        "48x48": "https://virtru.atlassian.net/secure/projectavatar?pid=11300&avatarId=12104",
+        "24x24": "https://virtru.atlassian.net/secure/projectavatar?size=small&pid=11300&avatarId=12104",
+        "16x16": "https://virtru.atlassian.net/secure/projectavatar?size=xsmall&pid=11300&avatarId=12104",
+        "32x32": "https://virtru.atlassian.net/secure/projectavatar?size=medium&pid=11300&avatarId=12104"
+      }
+    },
+    "customfield_11000": null,
+    "fixVersions": [],
+    "customfield_11001": {
+      "self": "https://virtru.atlassian.net/rest/api/2/customFieldOption/10411",
+      "value": "No",
+      "id": "10411"
+    },
+    "customfield_11200": null,
+    "aggregatetimespent": null,
+    "resolution": {
+      "self": "https://virtru.atlassian.net/rest/api/2/resolution/1",
+      "id": "1",
+      "description": "A fix for this issue is checked into the tree and tested.",
+      "name": "Fixed"
+    },
+    "customfield_11203": null,
+    "customfield_11400": "com.atlassian.servicedesk.plugins.approvals.internal.customfield.ApprovalsCFValue@172d49f",
+    "customfield_10500": "0|i01i4f:",
+    "customfield_10700": null,
+    "customfield_10900": null,
+    "resolutiondate": "2016-05-16T14:01:43.014-0400",
+    "workratio": -1,
+    "lastViewed": "2016-06-09T10:09:17.915-0400",
+    "watches": {
+      "self": "https://virtru.atlassian.net/rest/api/2/issue/WS-3531/watchers",
+      "watchCount": 4,
+      "isWatching": true
+    },
+    "created": "2016-03-25T17:24:22.123-0400",
+    "customfield_10020": null,
+    "priority": {
+      "self": "https://virtru.atlassian.net/rest/api/2/priority/3",
+      "iconUrl": "https://virtru.atlassian.net/images/icons/priorities/critical.svg",
+      "name": "Major",
+      "id": "3"
+    },
+    "customfield_10300": "1_*:*_2_*:*_428356931_*|*_10007_*:*_2_*:*_812811419_*|*_10108_*:*_1_*:*_2200_*|*_4_*:*_4_*:*_605690337_*|*_5_*:*_3_*:*_411869098_*|*_6_*:*_2_*:*_1656579215_*|*_10005_*:*_4_*:*_565331704",
+    "labels": [],
+    "customfield_10016": null,
+    "customfield_10017": null,
+    "customfield_11501": 0,
+    "customfield_10018": null,
+    "customfield_10019": null,
+    "timeestimate": null,
+    "aggregatetimeoriginalestimate": null,
+    "versions": [],
+    "issuelinks": [
+      {
+        "id": "24814",
+        "self": "https://virtru.atlassian.net/rest/api/2/issueLink/24814",
+        "type": {
+          "id": "10003",
+          "name": "Relates",
+          "inward": "relates to",
+          "outward": "relates to",
+          "self": "https://virtru.atlassian.net/rest/api/2/issueLinkType/10003"
+        },
+        "inwardIssue": {
+          "id": "26805",
+          "key": "WS-3595",
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26805",
+          "fields": {
+            "summary": "Update read receipt indicator icon across Virtru properties",
+            "status": {
+              "self": "https://virtru.atlassian.net/rest/api/2/status/6",
+              "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+              "iconUrl": "https://virtru.atlassian.net/images/icons/statuses/closed.png",
+              "name": "Closed",
+              "id": "6",
+              "statusCategory": {
+                "self": "https://virtru.atlassian.net/rest/api/2/statuscategory/3",
+                "id": 3,
+                "key": "done",
+                "colorName": "green",
+                "name": "Done"
+              }
+            },
+            "priority": {
+              "self": "https://virtru.atlassian.net/rest/api/2/priority/2",
+              "iconUrl": "https://virtru.atlassian.net/images/icons/priorities/blocker.svg",
+              "name": "Critical",
+              "id": "2"
+            },
+            "issuetype": {
+              "self": "https://virtru.atlassian.net/rest/api/2/issuetype/7",
+              "id": "7",
+              "description": "gh.issue.story.desc",
+              "iconUrl": "https://virtru.atlassian.net/secure/viewavatar?size=xsmall&avatarId=11515&avatarType=issuetype",
+              "name": "Story",
+              "subtask": false,
+              "avatarId": 11515
+            }
+          }
+        }
+      }
+    ],
+    "assignee": {
+      "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+      "name": "jason",
+      "key": "jason",
+      "emailAddress": "jason@virtru.com",
+      "avatarUrls": {
+        "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+        "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+        "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+        "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+      },
+      "displayName": "Jason Ghent",
+      "active": true,
+      "timeZone": "America/New_York"
+    },
+    "updated": "2016-05-16T14:01:43.026-0400",
+    "status": {
+      "self": "https://virtru.atlassian.net/rest/api/2/status/6",
+      "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+      "iconUrl": "https://virtru.atlassian.net/images/icons/statuses/closed.png",
+      "name": "Closed",
+      "id": "6",
+      "statusCategory": {
+        "self": "https://virtru.atlassian.net/rest/api/2/statuscategory/3",
+        "id": 3,
+        "key": "done",
+        "colorName": "green",
+        "name": "Done"
+      }
+    },
+    "components": [
+      {
+        "self": "https://virtru.atlassian.net/rest/api/2/component/10402",
+        "id": "10402",
+        "name": "Browser Extension"
+      },
+      {
+        "self": "https://virtru.atlassian.net/rest/api/2/component/10401",
+        "id": "10401",
+        "name": "Dashboard"
+      }
+    ],
+    "timeoriginalestimate": null,
+    "description": "As a person using Read Receipt, I expect the indicator to reflect whether or not the direct recipients of the message have read it. I also care about how many people the message has been forwarded to, but that should be reflected separately.\r\n\r\n*Acceptance Criteria*\r\n* Read Receipt math is calculated using only the direct recipients of a message\r\n* BP and DSH display the same RR status",
+    "customfield_10013": null,
+    "customfield_11300": null,
+    "customfield_10014": null,
+    "customfield_11301": null,
+    "customfield_11500": 0,
+    "customfield_10015": null,
+    "timetracking": {},
+    "customfield_10006": "9223372036854775807",
+    "customfield_10600": null,
+    "customfield_10007": [
+      "com.atlassian.greenhopper.service.sprint.Sprint@f82a3c[id=208,rapidViewId=26,state=CLOSED,name=Sprint 75,startDate=2016-03-29T14:09:45.276-04:00,endDate=2016-04-12T14:09:00.000-04:00,completeDate=2016-04-12T10:39:59.626-04:00,sequence=208]",
+      "com.atlassian.greenhopper.service.sprint.Sprint@7ac830[id=209,rapidViewId=26,state=CLOSED,name=Sprint 76,startDate=2016-04-12T15:43:06.302-04:00,endDate=2016-04-26T15:43:00.000-04:00,completeDate=2016-04-26T12:16:20.207-04:00,sequence=209]",
+      "com.atlassian.greenhopper.service.sprint.Sprint@1dd39c2[id=211,rapidViewId=26,state=CLOSED,name=Sprint 77,startDate=2016-04-26T13:57:58.451-04:00,endDate=2016-05-10T13:57:00.000-04:00,completeDate=2016-05-10T11:57:49.994-04:00,sequence=211]",
+      "com.atlassian.greenhopper.service.sprint.Sprint@1167556[id=215,rapidViewId=26,state=CLOSED,name=Sprint 78,startDate=2016-05-10T15:00:13.165-04:00,endDate=2016-05-24T15:00:00.000-04:00,completeDate=2016-05-24T12:37:51.243-04:00,sequence=215]"
+    ],
+    "customfield_10008": "PM-96",
+    "customfield_10800": null,
+    "customfield_10801": null,
+    "attachment": [
+      {
+        "self": "https://virtru.atlassian.net/rest/api/2/attachment/24101",
+        "id": "24101",
+        "filename": "chrome.zip",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-13T13:45:33.727-0400",
+        "size": 5881187,
+        "mimeType": "application/zip",
+        "content": "https://virtru.atlassian.net/secure/attachment/24101/chrome.zip"
+      },
+      {
+        "self": "https://virtru.atlassian.net/rest/api/2/attachment/23214",
+        "id": "23214",
+        "filename": "Screenshot 2016-04-13 14.42.34.png",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-14T09:58:19.087-0400",
+        "size": 43083,
+        "mimeType": "image/png",
+        "content": "https://virtru.atlassian.net/secure/attachment/23214/Screenshot+2016-04-13+14.42.34.png",
+        "thumbnail": "https://virtru.atlassian.net/secure/thumbnail/23214/_thumb_23214.png"
+      },
+      {
+        "self": "https://virtru.atlassian.net/rest/api/2/attachment/23212",
+        "id": "23212",
+        "filename": "Screenshot 2016-04-13 14.42.34.png",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-13T15:11:10.276-0400",
+        "size": 43083,
+        "mimeType": "image/png",
+        "content": "https://virtru.atlassian.net/secure/attachment/23212/Screenshot+2016-04-13+14.42.34.png",
+        "thumbnail": "https://virtru.atlassian.net/secure/thumbnail/23212/_thumb_23212.png"
+      }
+    ],
+    "aggregatetimeestimate": null,
+    "summary": "Read Receipt indicator applies to direct recipients",
+    "creator": {
+      "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+      "name": "jordan",
+      "key": "jordan",
+      "emailAddress": "jordan@virtru.com",
+      "avatarUrls": {
+        "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+        "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+        "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+        "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+      },
+      "displayName": "Jordan Duggan",
+      "active": true,
+      "timeZone": "America/New_York"
+    },
+    "subtasks": [],
+    "reporter": {
+      "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+      "name": "jordan",
+      "key": "jordan",
+      "emailAddress": "jordan@virtru.com",
+      "avatarUrls": {
+        "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+        "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+        "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+        "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+      },
+      "displayName": "Jordan Duggan",
+      "active": true,
+      "timeZone": "America/New_York"
+    },
+    "customfield_10000": "1_*:*_2_*:*_428356931_*|*_10007_*:*_2_*:*_812811419_*|*_10108_*:*_1_*:*_2200_*|*_4_*:*_4_*:*_605690337_*|*_5_*:*_3_*:*_411869098_*|*_6_*:*_2_*:*_1656579215_*|*_10005_*:*_4_*:*_565331704",
+    "aggregateprogress": {
+      "progress": 0,
+      "total": 0
+    },
+    "customfield_10001": "2016-03-29T13:17:48.787-0400",
+    "customfield_10002": null,
+    "customfield_10200": null,
+    "customfield_10003": null,
+    "customfield_10201": "Erroneously reopened. See WS-3595.",
+    "customfield_10400": null,
+    "customfield_10004": 0,
+    "customfield_11204": null,
+    "duedate": null,
+    "progress": {
+      "progress": 0,
+      "total": 0
+    },
+    "comment": {
+      "startAt": 0,
+      "maxResults": 19,
+      "total": 19,
+      "comments": [
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33079",
+          "id": "33079",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Implementation:\r\nRemove fwdLog recipients from recipients read rate math in the policy search document. Confirm that read receipt calculating logic is entirely in design doc and not in component used by BP/DSH.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-03-29T13:17:48.787-0400",
+          "updated": "2016-03-29T13:17:48.787-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33231",
+          "id": "33231",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Lost some time debugging why Cloudant was not showing the same output that the Chrome debugger was. Appears that updating an array while iterating over it will work in Chrome. Will not work in Cloudant.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-04T18:04:23.443-0400",
+          "updated": "2016-04-04T18:04:23.443-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33611",
+          "id": "33611",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+            "name": "payam",
+            "key": "payam",
+            "emailAddress": "payam@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+            },
+            "displayName": "Payam Abedi",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "in new staging (develo01)",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+            "name": "payam",
+            "key": "payam",
+            "emailAddress": "payam@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+            },
+            "displayName": "Payam Abedi",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-12T10:15:35.870-0400",
+          "updated": "2016-04-12T10:15:44.107-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33623",
+          "id": "33623",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+            "name": "payam",
+            "key": "payam",
+            "emailAddress": "payam@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+            },
+            "displayName": "Payam Abedi",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Estimated 2, Copmleted 3, Remaining 0",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+            "name": "payam",
+            "key": "payam",
+            "emailAddress": "payam@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+            },
+            "displayName": "Payam Abedi",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-12T10:23:35.954-0400",
+          "updated": "2016-04-12T10:23:35.954-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33669",
+          "id": "33669",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "The forwarding tree in dashboard, shows messages that were forwarded to be open, but not green.  See screenshot.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-13T15:00:35.713-0400",
+          "updated": "2016-04-13T15:00:35.713-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33671",
+          "id": "33671",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "[~dcrowley], This is related to WS-3595, rather than WS-3531. Can you re-close this and re-open the other?",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-13T16:19:45.083-0400",
+          "updated": "2016-04-13T16:19:45.083-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/33678",
+          "id": "33678",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "The forwarding tree in dashboard, shows messages that were forwarded to be open, but not green. See screenshot.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-04-14T09:58:06.190-0400",
+          "updated": "2016-04-14T09:58:06.190-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34208",
+          "id": "34208",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "http://screencast.com/t/ba6p08H81d  - the dashboard should only show 33% because only 1 of 3 direct recipients read the email.\r\n\r\nRead Receipt is counting the people it was forwarded to as being part of the Read Receipt calculation.  The Browser Extension is correct, but the dashboard is not.  We also don't want to show the read receipt icon next to recipients the emails were forwarded to. ",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-03T14:09:08.574-0400",
+          "updated": "2016-05-03T14:09:08.574-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34209",
+          "id": "34209",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "The tool tips should NOT be showing %s either. The numbering convention used should be identical to the one used in BP. So it should show \"1 of 3\" vs \"33%\".",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-03T14:12:44.913-0400",
+          "updated": "2016-05-03T14:12:44.913-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34616",
+          "id": "34616",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "This issue may have been erroneously reopened. Confirmation required.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-10T11:26:26.899-0400",
+          "updated": "2016-05-10T11:26:26.899-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34733",
+          "id": "34733",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "The BP build attached is for confirmation that the fwd icon is still present after moving the read receipt dependencies into their own repo. It should not show any functional changes.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-13T13:46:11.762-0400",
+          "updated": "2016-05-13T13:46:11.762-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34810",
+          "id": "34810",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "This is close, the envelope icons need to be removed for anyone it was forwarded to.  The envelope icon should only show for direct recipients.  So the second level should not have envelope icons.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T11:29:44.705-0400",
+          "updated": "2016-05-16T11:29:44.705-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34811",
+          "id": "34811",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Wait - I think this may be right. In the BP interface, the count of \"reads\" should be of the direct recipients. There should be a different indicator that shows the number of times it was forwarded. However, once in the dashboard view, looking at the forwarding tree, I think it IS appropriate to show the envelop icon next to each recipient. The tool tip should not pop up, and the text to the right of it should be when it was read. [~raymond] what's your take?",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T11:33:48.832-0400",
+          "updated": "2016-05-16T11:33:48.832-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34812",
+          "id": "34812",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "[~jordan] the envelope icons don't actually work, it will always say unread.  So if we keep it, it needs to work.  So either way works for me, but right now the icons show and always say unread even if its read.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T11:35:18.349-0400",
+          "updated": "2016-05-16T11:35:18.349-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34813",
+          "id": "34813",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Ahhhhh, yeah that's a problem. [~jason] What is the LOE on getting the icon's to accurately reflect \"read\" status?",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+            "name": "jordan",
+            "key": "jordan",
+            "emailAddress": "jordan@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+            },
+            "displayName": "Jordan Duggan",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T11:39:54.749-0400",
+          "updated": "2016-05-16T11:39:54.749-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34814",
+          "id": "34814",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "Low. I'm surprised it isn't working because I definitely tested it, to the extent that I wrote automated tests for it as well. Dan, can you provide a screencap of where it isn't working? It sounds like I'll need to update the tests as well.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+            "name": "jason",
+            "key": "jason",
+            "emailAddress": "jason@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+            },
+            "displayName": "Jason Ghent",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T11:44:27.954-0400",
+          "updated": "2016-05-16T11:44:27.954-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34819",
+          "id": "34819",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "here it is - as you can see the email was forwarded twice, and both email addresses that forwarded is shown as unread.  http://screencast.com/t/P5oi2g5W - and it had to be read to be forwarded.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T12:26:09.598-0400",
+          "updated": "2016-05-16T12:26:09.598-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34822",
+          "id": "34822",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=raymond",
+            "name": "raymond",
+            "key": "raymond",
+            "emailAddress": "raymond@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=raymond&avatarId=10402",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=raymond&avatarId=10402",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=raymond&avatarId=10402",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=raymond&avatarId=10402"
+            },
+            "displayName": "Raymond Gonzales",
+            "active": true,
+            "timeZone": "America/Los_Angeles"
+          },
+          "body": "Sorry for chiming in late here. Basically, +1 to everything Jordan said. \r\n\r\nJust wanted to clarify the definition \"# of times forwarded\" so we are all on the same page. Dan had pointed out that you could forward 1 time to five recipients. IMO, times = recipients that received a forward. \r\n\r\nFrom a user's perspective, its more valuable to know how many recipients received a forward than simply the number of times. Furthermore, I believe that most users interpret forwarding as the number of recipients rather than the action of forwarding. For example, you would say \"I forwarded the email to 5 people\" rather than, \"I forwarded the email once to 5 people.\" (Although, I have no data to support this theory). It might be more accurate to say *\"# of recipients forwarded to.\"* Only case where this could get confusing is forwarding to group emails, where we do not know the total number of recipients.  ",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=raymond",
+            "name": "raymond",
+            "key": "raymond",
+            "emailAddress": "raymond@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=raymond&avatarId=10402",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=raymond&avatarId=10402",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=raymond&avatarId=10402",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=raymond&avatarId=10402"
+            },
+            "displayName": "Raymond Gonzales",
+            "active": true,
+            "timeZone": "America/Los_Angeles"
+          },
+          "created": "2016-05-16T13:19:51.253-0400",
+          "updated": "2016-05-16T13:19:51.253-0400"
+        },
+        {
+          "self": "https://virtru.atlassian.net/rest/api/2/issue/26336/comment/34824",
+          "id": "34824",
+          "author": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "body": "To work you have to expand the email to show the whole thread.  Which makes sense because that is the actual email that was sent.",
+          "updateAuthor": {
+            "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+            "name": "dcrowley",
+            "key": "dcrowley",
+            "emailAddress": "dcrowley@virtru.com",
+            "avatarUrls": {
+              "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+              "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+              "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+              "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+            },
+            "displayName": "Daniel Crowley",
+            "active": true,
+            "timeZone": "America/New_York"
+          },
+          "created": "2016-05-16T14:01:43.025-0400",
+          "updated": "2016-05-16T14:01:43.025-0400"
+        }
+      ]
+    },
+    "votes": {
+      "self": "https://virtru.atlassian.net/rest/api/2/issue/WS-3531/votes",
+      "votes": 0,
+      "hasVoted": false
+    },
+    "worklog": {
+      "startAt": 0,
+      "maxResults": 20,
+      "total": 0,
+      "worklogs": []
+    }
+  },
+  "changelog": {
+    "startAt": 0,
+    "maxResults": 38,
+    "total": 38,
+    "histories": [
+      {
+        "id": "116309",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-25T17:24:22.138-0400",
+        "items": [
+          {
+            "field": "Epic Link",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": "17552",
+            "toString": "PM-96"
+          }
+        ]
+      },
+      {
+        "id": "116314",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-25T17:26:04.591-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked higher"
+          }
+        ]
+      },
+      {
+        "id": "116431",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-28T21:28:16.521-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked higher"
+          }
+        ]
+      },
+      {
+        "id": "116434",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-28T21:28:26.686-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked lower"
+          }
+        ]
+      },
+      {
+        "id": "116474",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-28T21:37:16.505-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked higher"
+          }
+        ]
+      },
+      {
+        "id": "116701",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T13:13:23.847-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked higher"
+          }
+        ]
+      },
+      {
+        "id": "116734",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T13:29:59.314-0400",
+        "items": [
+          {
+            "field": "Story Points",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": null,
+            "toString": "2"
+          }
+        ]
+      },
+      {
+        "id": "116783",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T13:58:29.414-0400",
+        "items": [
+          {
+            "field": "Sprint",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": "208",
+            "toString": "Sprint 75"
+          }
+        ]
+      },
+      {
+        "id": "116785",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T13:58:29.598-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked lower"
+          }
+        ]
+      },
+      {
+        "id": "116792",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T14:42:24.651-0400",
+        "items": [
+          {
+            "field": "assignee",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "jason",
+            "toString": "Jason Ghent"
+          }
+        ]
+      },
+      {
+        "id": "116794",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T14:43:27.008-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "1",
+            "fromString": "Open",
+            "to": "10005",
+            "toString": "In Development"
+          }
+        ]
+      },
+      {
+        "id": "116798",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-29T15:00:19.420-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10005",
+            "fromString": "In Development",
+            "to": "1",
+            "toString": "Open"
+          }
+        ]
+      },
+      {
+        "id": "116829",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-03-30T16:40:31.466-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "1",
+            "fromString": "Open",
+            "to": "10005",
+            "toString": "In Development"
+          }
+        ]
+      },
+      {
+        "id": "117019",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-04T18:03:39.616-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10005",
+            "fromString": "In Development",
+            "to": "10007",
+            "toString": "Ready for Review"
+          }
+        ]
+      },
+      {
+        "id": "117863",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+          "name": "payam",
+          "key": "payam",
+          "emailAddress": "payam@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+          },
+          "displayName": "Payam Abedi",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-12T10:15:21.051-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10007",
+            "fromString": "Ready for Review",
+            "to": "5",
+            "toString": "Resolved"
+          }
+        ]
+      },
+      {
+        "id": "117874",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+          "name": "payam",
+          "key": "payam",
+          "emailAddress": "payam@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+          },
+          "displayName": "Payam Abedi",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-12T10:23:38.560-0400",
+        "items": [
+          {
+            "field": "Story Points",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": "2",
+            "to": null,
+            "toString": "0"
+          }
+        ]
+      },
+      {
+        "id": "117916",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=payam",
+          "name": "payam",
+          "key": "payam",
+          "emailAddress": "payam@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=payam&avatarId=11601",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=payam&avatarId=11601",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=payam&avatarId=11601",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=payam&avatarId=11601"
+          },
+          "displayName": "Payam Abedi",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-12T10:40:01.077-0400",
+        "items": [
+          {
+            "field": "Sprint",
+            "fieldtype": "custom",
+            "from": "208",
+            "fromString": "Sprint 75",
+            "to": "208, 209",
+            "toString": "Sprint 75, Sprint 76"
+          }
+        ]
+      },
+      {
+        "id": "118049",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-12T14:21:41.051-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked higher"
+          }
+        ]
+      },
+      {
+        "id": "118262",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-13T15:00:35.720-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "5",
+            "fromString": "Resolved",
+            "to": "4",
+            "toString": "Reopened"
+          }
+        ]
+      },
+      {
+        "id": "118264",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-13T15:11:11.820-0400",
+        "items": [
+          {
+            "field": "Attachment",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "23212",
+            "toString": "Screenshot 2016-04-13 14.42.34.png"
+          }
+        ]
+      },
+      {
+        "id": "118270",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-13T16:15:25.159-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "4",
+            "fromString": "Reopened",
+            "to": "10005",
+            "toString": "In Development"
+          }
+        ]
+      },
+      {
+        "id": "118278",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-13T18:02:16.115-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10005",
+            "fromString": "In Development",
+            "to": "5",
+            "toString": "Resolved"
+          },
+          {
+            "field": "resolution",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "1",
+            "toString": "Fixed"
+          },
+          {
+            "field": "Dev Note",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": null,
+            "toString": "Erroneously reopened. See WS-3595."
+          }
+        ]
+      },
+      {
+        "id": "118284",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-14T09:58:06.193-0400",
+        "items": [
+          {
+            "field": "resolution",
+            "fieldtype": "jira",
+            "from": "1",
+            "fromString": "Fixed",
+            "to": null,
+            "toString": null
+          },
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "5",
+            "fromString": "Resolved",
+            "to": "4",
+            "toString": "Reopened"
+          }
+        ]
+      },
+      {
+        "id": "118285",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-14T09:58:20.058-0400",
+        "items": [
+          {
+            "field": "Attachment",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "23214",
+            "toString": "Screenshot 2016-04-13 14.42.34.png"
+          }
+        ]
+      },
+      {
+        "id": "118286",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-14T09:59:29.362-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "4",
+            "fromString": "Reopened",
+            "to": "6",
+            "toString": "Closed"
+          },
+          {
+            "field": "resolution",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "1",
+            "toString": "Fixed"
+          }
+        ]
+      },
+      {
+        "id": "118960",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-04-26T13:25:35.724-0400",
+        "items": [
+          {
+            "field": "Link",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "WS-3595",
+            "toString": "This issue relates to WS-3595"
+          }
+        ]
+      },
+      {
+        "id": "119761",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-03T14:09:08.577-0400",
+        "items": [
+          {
+            "field": "resolution",
+            "fieldtype": "jira",
+            "from": "1",
+            "fromString": "Fixed",
+            "to": null,
+            "toString": null
+          },
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "6",
+            "fromString": "Closed",
+            "to": "4",
+            "toString": "Reopened"
+          }
+        ]
+      },
+      {
+        "id": "119762",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-03T14:09:25.533-0400",
+        "items": [
+          {
+            "field": "Sprint",
+            "fieldtype": "custom",
+            "from": "208, 209",
+            "fromString": "Sprint 75, Sprint 76",
+            "to": "208, 209, 211",
+            "toString": "Sprint 75, Sprint 76, Sprint 77"
+          }
+        ]
+      },
+      {
+        "id": "120066",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jordan",
+          "name": "jordan",
+          "key": "jordan",
+          "emailAddress": "jordan@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jordan&avatarId=11700",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jordan&avatarId=11700",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jordan&avatarId=11700",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jordan&avatarId=11700"
+          },
+          "displayName": "Jordan Duggan",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-05T12:44:56.282-0400",
+        "items": [
+          {
+            "field": "Rank",
+            "fieldtype": "custom",
+            "from": "",
+            "fromString": "",
+            "to": "",
+            "toString": "Ranked lower"
+          }
+        ]
+      },
+      {
+        "id": "121227",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-10T10:35:47.994-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "4",
+            "fromString": "Reopened",
+            "to": "10005",
+            "toString": "In Development"
+          }
+        ]
+      },
+      {
+        "id": "121282",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-10T11:26:26.902-0400",
+        "items": [
+          {
+            "field": "Original Estimate",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": null,
+            "toString": "0"
+          },
+          {
+            "field": "Total Work",
+            "fieldtype": "custom",
+            "from": null,
+            "fromString": null,
+            "to": null,
+            "toString": "0"
+          }
+        ]
+      },
+      {
+        "id": "121335",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=znelson",
+          "name": "znelson",
+          "key": "znelson",
+          "emailAddress": "znelson@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=znelson&avatarId=10401",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=znelson&avatarId=10401",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=znelson&avatarId=10401",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=znelson&avatarId=10401"
+          },
+          "displayName": "Zachary Nelson",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-10T11:57:51.226-0400",
+        "items": [
+          {
+            "field": "Sprint",
+            "fieldtype": "custom",
+            "from": "208, 209, 211",
+            "fromString": "Sprint 75, Sprint 76, Sprint 77",
+            "to": "208, 209, 211, 215",
+            "toString": "Sprint 75, Sprint 76, Sprint 77, Sprint 78"
+          }
+        ]
+      },
+      {
+        "id": "122103",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-11T20:11:08.180-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10005",
+            "fromString": "In Development",
+            "to": "10007",
+            "toString": "Ready for Review"
+          }
+        ]
+      },
+      {
+        "id": "122481",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-13T13:45:34.267-0400",
+        "items": [
+          {
+            "field": "Attachment",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "24101",
+            "toString": "chrome.zip"
+          }
+        ]
+      },
+      {
+        "id": "122482",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-13T13:46:18.164-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10007",
+            "fromString": "Ready for Review",
+            "to": "10108",
+            "toString": "Review Done"
+          }
+        ]
+      },
+      {
+        "id": "122483",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=jason",
+          "name": "jason",
+          "key": "jason",
+          "emailAddress": "jason@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?ownerId=jason&avatarId=11800",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&ownerId=jason&avatarId=11800",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&ownerId=jason&avatarId=11800",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&ownerId=jason&avatarId=11800"
+          },
+          "displayName": "Jason Ghent",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-13T13:46:20.364-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "10108",
+            "fromString": "Review Done",
+            "to": "5",
+            "toString": "Resolved"
+          }
+        ]
+      },
+      {
+        "id": "125056",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-16T11:29:44.715-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "5",
+            "fromString": "Resolved",
+            "to": "4",
+            "toString": "Reopened"
+          }
+        ]
+      },
+      {
+        "id": "125098",
+        "author": {
+          "self": "https://virtru.atlassian.net/rest/api/2/user?username=dcrowley",
+          "name": "dcrowley",
+          "key": "dcrowley",
+          "emailAddress": "dcrowley@virtru.com",
+          "avatarUrls": {
+            "48x48": "https://virtru.atlassian.net/secure/useravatar?avatarId=10122",
+            "24x24": "https://virtru.atlassian.net/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://virtru.atlassian.net/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://virtru.atlassian.net/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Daniel Crowley",
+          "active": true,
+          "timeZone": "America/New_York"
+        },
+        "created": "2016-05-16T14:01:43.027-0400",
+        "items": [
+          {
+            "field": "status",
+            "fieldtype": "jira",
+            "from": "4",
+            "fromString": "Reopened",
+            "to": "6",
+            "toString": "Closed"
+          },
+          {
+            "field": "resolution",
+            "fieldtype": "jira",
+            "from": null,
+            "fromString": null,
+            "to": "1",
+            "toString": "Fixed"
+          }
+        ]
+      }
+    ]
+  }
+}

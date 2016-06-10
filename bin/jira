@@ -21,9 +21,8 @@ program :description, 'A command line tool that profiles Jira projects, teams, a
 
 default_command :profile
 global_option('-c', '--config FILE', 'Load config data for your commands to use (default is config.yml)') { |file| JiraProfiler.configure_from_yaml_file(file) }
-global_option('-d', '--debug', 'Sets log level to DEBUG') { JiraProfiler.configuration.log_level = :debug }
+global_option('-v', '--verbose', 'Sets log level to DEBUG') { JiraProfiler.configuration.log_level = :debug }
 global_option('-l', '--log FILE', 'Load config data for your commands to use (default is log.txt)') { |file| JiraProfiler.configuration.log_file = file}
-global_option('-t', '--team FILE', 'Specify a path to a team data file (default is ./team.json)') { |file| JiraProfiler.configuration.team_data_file = file}
 
 # bin/jira  profile -p "Web Stack" -t "spec/fixtures/team.json"
 command :profile do |c|
@@ -33,7 +32,7 @@ command :profile do |c|
   c.example 'Profile project Foo', 'jira profile --project Foo'
   c.option '-p', '--project PROJECT', String, 'Specify a Jira project name'
   c.option '-u', '--user USER', String, 'Specify a Jira project name'
-  c.option '-t', '--team TEAM', String, 'Specify a path to a team data file. Default is ./team.json'
+  c.option '-d', '--team_data_file DATAFILE', String, 'Specify a path to a team data file. Default is ./team.json'
   c.action do |args, options|
     JiraProfiler::Cli.run(:profile, args, options)
   end

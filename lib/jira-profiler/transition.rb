@@ -11,7 +11,7 @@ module JiraProfiler
       @field       = field
       @description = description
       if field == 'assignee'
-        @from, @to = JiraProfiler.standardize_name(from), JiraProfiler.standardize_name(to)
+        @from, @to = JiraProfiler::Cli.standardize_name(from), JiraProfiler::Cli.standardize_name(to)
       else
         @from, @to = from, to
       end
@@ -19,7 +19,7 @@ module JiraProfiler
 
     # Convenience attribute to return project via parent issue
     def project
-      @issue.project
+      @issue.project .team.standardize_name(name)
     end
 
   end
