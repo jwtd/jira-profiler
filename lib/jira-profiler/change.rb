@@ -1,6 +1,6 @@
 module JiraProfiler
 
-  class Transition
+  class Change
     include Logger
 
     attr_reader :issue, :at, :field, :from, :to, :description

@@ -6,6 +6,9 @@ end
 require "jira-profiler/core_extensions/string"
 String.include CoreExtensions::String
 
+require "jira-profiler/core_extensions/time"
+Time.include CoreExtensions::Time
+
 require "jira-profiler/version"
 require "jira-profiler/configuration"
 require "jira-profiler/logger"
@@ -16,5 +19,5 @@ require "jira-profiler/team"
 require "jira-profiler/project"
 require "jira-profiler/sprint"
 require "jira-profiler/issue"
-require "jira-profiler/transition"
+require "jira-profiler/change"
 require "jira-profiler/record"
