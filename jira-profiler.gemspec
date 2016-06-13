@@ -42,6 +42,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'httparty'
   spec.add_dependency 'httparty-filecache'
   spec.add_dependency 'commander'
-  spec.add_dependency 'time_difference'
+  spec.add_dependency 'time_difference', '~> 0.4.2'
 
 end

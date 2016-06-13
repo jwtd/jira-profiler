@@ -8,6 +8,7 @@ String.include CoreExtensions::String
 
 require "jira-profiler/core_extensions/time"
 Time.include CoreExtensions::Time
+DateTime.include CoreExtensions::Time
 
 require "jira-profiler/version"
 require "jira-profiler/configuration"

@@ -16,23 +16,25 @@ module JiraProfiler
 
     StatusIteration = Struct.new(:start_date, :end_date, :elapsed_time, :assignee, :sprint)
 
+    # Look up project by project name
+    def self.find_by(issue_id_or_label)
+      self.new(get("/rest/api/2/issue/#{issue_id_or_label}?expand=changelog"))
+    end
+
     # Given ID, Label, or json object
     def initialize(options)
 
       # If an id was provided, look it up, otherwise assume the option block is JSON returned from a JQL query
-      if options.has_key?(:id)
-        issue_id_or_label = options[:id]
-        jira_issue = self.class.get("/rest/api/2/issue/#{issue_id_or_label}?expand=changelog")
+      if options.has_key?(:project)
+        @project = options['project'] if options.has_key?(:project)
       else
-        jira_issue = options
+        @project = JiraProfiler::Project.find_by(:project_name => options['fields']['project']['name'])
       end
 
-      f = jira_issue['fields']
-
       # Get issues metadata
-      @id          = jira_issue['id']
-      @key         = jira_issue['key']
-      @project     = f['project']['name']
+      f            = options['fields']
+      @id          = options['id']
+      @key         = options['key']
       @type        = f['issuetype']['name']
       @reporter    = f['reporter']['displayName']
       @creator     = f['creator']['displayName']
@@ -54,10 +56,17 @@ module JiraProfiler
       @created_at  = DateTime.parse(f['created'])
       @statuses       = Set.new()
       @status_history = {}
-      @changes  = []
+      @changes      = []
       @cur_sprint   = nil
       @cur_assignee = nil
       @cur_status   = nil
+
+
+
+      # Lookup and associate the value of each field with the name in the reference
+      fields[:keys].each do |field_key, field_name|
+        fields[:names][field_name] = f[field_key]
+      end
 
       # Step through the issue's history and record transitions
       record_change(@created_at, 'status', '', 'Open')
@@ -75,6 +84,17 @@ module JiraProfiler
 
     end
 
+
+    def [](name_or_key)
+      fields[:names][name_or_key] if fields[:names].has_key?(name_or_key)
+      fields[:keys][name_or_key] if fields[:keys].has_key?(name_or_key)
+    end
+
+    def fields
+      @fields[type]
+    end
+
+
     # Returns all subtasks beloning to a project
     def subtasks
       @subtasks unless @subtasks.nil?
@@ -89,27 +109,19 @@ module JiraProfiler
     end
 
     # How much time was spent in each of the statuses
-    def accumulated_time_in_status(status, assignee = :all)
-      puts "------------------"
-      puts "status: #{status}"
-      pp status_history[status]
+    def accumulated_hours_in_status(status, assignee = :all)
       status_history[status].inject(0) do |sum, i|
-        puts "item i: "
-        pp i
-        elapsed_time = difference_in_hours(i.start_date, i.end_date)
-        (i.assignee == :all or i.assignee == assignee) ? sum + elapsed_time : sum
+        sum + i.elapsed_time if assignee == :all or assignee == i.assignee
       end
     end
 
     # How much time passed between the first time a status was set and the last time
-    def elapsed_time_in_status(status)
-      difference_in_hours(statuses[status].first.start_time, statuses[status].last.end_time)
+    def elapsed_hours_in_status(status)
+      status_history[status].first.start_date.hours_from(status_history[status].last.end_date)
     end
 
 
     private
-
-# StatusIteration = Struct.new(:start_date, :end_date, :assignee, :sprint)
 
 
     # Recrods relevant changes, but not all items in history
@@ -120,7 +132,7 @@ module JiraProfiler
         # Set the ending date of the last status
         if status_history.has_key?(from)
           status_history[from].last[:end_date] = date
-          status_history[from].last[:elapsed_time] = difference_in_hours(status_history[from].last[:start_date], :end_date)
+          status_history[from].last[:elapsed_time] = status_history[from].last[:start_date].hours_from(status_history[from].last[:end_date])
         end
         # Add status if it doesn't exist
         statuses << to

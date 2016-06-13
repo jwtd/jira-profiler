@@ -27,13 +27,20 @@ module CoreExtensions
       TimeDifference.between(self, t).in_minutes
     end
 
-
     def seconds_from(t)
       TimeDifference.between(self, t).in_seconds
     end
 
     def as_sortable_timestamp
-      self.strftime('%Y.%m.%d.%H.%M.%s') #  '%-m/%-d/%Y %H:%M'
+      self.strftime('%Y.%m.%d.%H.%M.%s')
+    end
+
+    def as_sortable_datetime
+      self.strftime('%Y.%m.%d.%H.%M')
+    end
+
+    def as_sortable_date
+      self.strftime('%Y.%m.%d')
     end
 
     def time_from(t)

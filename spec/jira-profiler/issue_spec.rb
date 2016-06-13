@@ -21,16 +21,41 @@ describe JiraProfiler::Issue do
     end
   end
 
-  describe '.accumulated_time_in_status' do
-    it "should return the accumulated hours spent in a status" do
-      expect(@issue.accumulated_time_in_status('Open')).to eq 0
+  describe '.type' do
+    it "should return the issue type" do
+      expect(@issue.type).to eq "Story"
     end
   end
 
-  # describe '.elapsed_time_in_status' do
-  #   it "should return the hours between the first time a status was set and the last" do
-  #     expect(@issue.elapsed_time_in_status('open')).to eq 0
-  #   end
-  # end
+  describe '.status' do
+    it "should return the issues current status" do
+      expect(@issue.status).to eq "Closed"
+    end
+  end
+
+  describe '.statuses' do
+    it "should return an array containing the statuses which this issue went through" do
+      expect(@issue.statuses.size).to eq 7
+      expect(@issue.statuses.to_a).to eq ["Open", "In Development", "Ready for Review", "Resolved", "Reopened", "Closed", "Review Done"]
+    end
+  end
+
+  describe '.accumulated_hours_in_status' do
+    it "should return the accumulated hours spent in a status" do
+      expect(@issue.accumulated_hours_in_status('Open')).to eq 118.99 # (93.32 + 25.67)
+    end
+  end
+
+  describe '.elapsed_hours_in_status' do
+    it "should return the hours between the first time a status was set and the last" do
+      expect(@issue.elapsed_hours_in_status('Open')).to eq 119.27
+    end
+  end
+
+  describe '.epic' do
+    it "should return the issue's epic" do
+      expect(@issue.epic).to eq "Story"
+    end
+  end
 
 end

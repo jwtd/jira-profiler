@@ -1058,7 +1058,7 @@
         "created": "2016-03-25T17:24:22.138-0400",
         "items": [
           {
-            "field": "Epic Link",
+            "field": "≈",
             "fieldtype": "custom",
             "from": null,
             "fromString": null,

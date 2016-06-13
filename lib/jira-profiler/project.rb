@@ -7,28 +7,108 @@ module JiraProfiler
   class Project < JiraApiBase
     include Logger
 
-    attr_reader :id, :name, :contributors
+    attr_reader :id, :key, :name, :description, :contributors
 
-    def initialize(project_name)
-      logger.info "Initializing project '#{project_name}'"
-      @id   = nil
-      @name = project_name
+    @@projects = {}
+
+    # Look up project by project name
+    def self.find_by_name(project_name)
+      if @@projects.has_key?(project_name)
+        project = @@projects[project_name]
+      else
+        # Loop over all of the projects to find the matching project's id
+        project_id = nil
+        r = get("/rest/api/2/project")
+        r.each do |project|
+          project_id = project['id'] if project['name'] == project_name
+        end
+        project = self.new(get("/rest/api/2/project/#{project_id}"))
+        @@projects[project.name] = project
+        @@projects[project.id]   = project
+        @@projects[project.key]  = project
+      end
+      return project
+    end
+
+    # Look up project by project id
+    def self.find_by_key(project_key)
+      if @@projects.has_key?(project_key)
+        project = @@projects[project_key]
+      else
+        # Loop over all of the projects to find the matching project's id
+        project_id = nil
+        r = get("/rest/api/2/project")
+        r.each do |project|
+          project_id = project['id'] if project['key'] == project_key
+        end
+        project = self.new(get("/rest/api/2/project/#{project_id}"))
+        @@projects[project.name] = project
+        @@projects[project.id]   = project
+        @@projects[project.key]  = project
+      end
+      return project
+    end
+
+    # Look up project by project id
+    def self.find_by_id(project_id)
+      if @@projects.has_key?(project_id)
+        project = @@projects[project_id]
+      else
+        project = self.new(get("/rest/api/2/project/#{project_id}"))
+        @@projects[project.name] = project
+        @@projects[project.id]   = project
+        @@projects[project.key]  = project
+      end
+      return project
+    end
+
+    def initialize(options)
+
+      # Get issues metadata
+      @id   = options['id']
+      @key  = options['key']
+      @name = options['name']
+      #TODO: @versions = options['versions'].collect do {|v| v['name']}
+      @description = options['description']
+      @issue_types = options['issueTypes']
+
+      # Get the issue types and custom field map
+      # TODO: Should not do this every time we create an issue. Cache the results.
+      @issue_fields = {}
+      r = self.class.get("/rest/api/latest/issue/createmeta?projectKeys=#{key}&expand=projects.issuetypes.fields")
+      r['projects'].first['issuetypes'].each do |type_data|
+        type = type_data['name']
+        @issue_fields[type] = {:keys => {}, :names => {}}
+        type['fields'].each do |key, field|
+          @issue_fields[type][:keys][key] = field['name']
+          @issue_fields[type][:names][field['name']] = key
+        end
+      end
 
       # Prepare a reference object to store result
       @sprints = nil
 
-      # Loop over all views
-      rapid_views = self.class.get("/rest/greenhopper/1.0/rapidview")
-      rapid_views['views'].each do |view|
-        logger.debug "Checking view: #{view}"
-        if (view['name'] == project_name)
-          puts "Initializing view #{view['name']}"
-          @id = view['id']
-        end
-      end
+      # # Loop over all views to find this project's rapid view
+      # rapid_views = self.class.get("/rest/greenhopper/1.0/rapidview")
+      # rapid_views['views'].each do |view|
+      #   if (view['name'] == options[:project_name])
+      #     id = view['id']
+      #   end
+      # end
 
     end
 
+    def issue_types()
+      @issue_fields.keys
+    end
+
+    def issue_fields(issue_type = nil)
+      if issue_type.nil?
+        @issue_fields
+      else
+        @issue_fields[issue_type]
+      end
+    end
 
     def rapid_view
       self.class.get("/rest/greenhopper/1.0/sprintquery/#{id}")

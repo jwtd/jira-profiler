@@ -3,6 +3,7 @@ require 'pp'
 module JiraProfiler
 
   # A command line interface to retrieve the data from Jira
+  # Jira REST api https://docs.atlassian.com/jira/REST/latest/
 
   class Cli
 
