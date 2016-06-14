@@ -9,58 +9,56 @@ module JiraProfiler
 
     attr_reader :id, :key, :name, :description, :contributors
 
-    @@projects = {}
+    @@project_cache = {}
 
-    # Look up project by project name
-    def self.find_by_name(project_name)
-      if @@projects.has_key?(project_name)
-        project = @@projects[project_name]
-      else
-        # Loop over all of the projects to find the matching project's id
-        project_id = nil
-        r = get("/rest/api/2/project")
-        r.each do |project|
-          project_id = project['id'] if project['name'] == project_name
+    class << self
+
+      # Look up project by project id
+      def find_by_id(id)
+        find_by('id', id)
+      end
+
+      # Look up project by project key
+      def find_by_key(key)
+        find_by('key', key)
+      end
+
+      # Look up project by project name
+      def find_by_name(name)
+        find_by('name', name)
+      end
+
+      # Look up project by project id
+      def find_by(attribute, value)
+        if @@project_cache.has_key?(value)
+          project = @@project_cache[value]
+        else
+          project_id = lookup_id_for(attribute, value)
+          project = get_project(project_id)
         end
-        project = self.new(get("/rest/api/2/project/#{project_id}"))
-        @@projects[project.name] = project
-        @@projects[project.id]   = project
-        @@projects[project.key]  = project
+        return project
       end
-      return project
-    end
 
-    # Look up project by project id
-    def self.find_by_key(project_key)
-      if @@projects.has_key?(project_key)
-        project = @@projects[project_key]
-      else
-        # Loop over all of the projects to find the matching project's id
-        project_id = nil
-        r = get("/rest/api/2/project")
-        r.each do |project|
-          project_id = project['id'] if project['key'] == project_key
+      # Loop over all of the projects to find the id of the project whose attribute matches the value provided
+      def lookup_id_for(attribute, value)
+        return value if attribute == 'id'
+        project_list = get("/rest/api/2/project")
+        project_list.each do |project|
+          return project['id'] if project[attribute] == value
         end
-        project = self.new(get("/rest/api/2/project/#{project_id}"))
-        @@projects[project.name] = project
-        @@projects[project.id]   = project
-        @@projects[project.key]  = project
       end
-      return project
+
+      # Cache project instances to avoid rebuilding multiple times
+      def get_project(id)
+        project = new(get("/rest/api/2/project/#{id}"))
+        @@project_cache[project.name] = project
+        @@project_cache[project.id]   = project
+        @@project_cache[project.key]  = project
+        return project
+      end
+
     end
 
-    # Look up project by project id
-    def self.find_by_id(project_id)
-      if @@projects.has_key?(project_id)
-        project = @@projects[project_id]
-      else
-        project = self.new(get("/rest/api/2/project/#{project_id}"))
-        @@projects[project.name] = project
-        @@projects[project.id]   = project
-        @@projects[project.key]  = project
-      end
-      return project
-    end
 
     def initialize(options)
 
@@ -70,7 +68,6 @@ module JiraProfiler
       @name = options['name']
       #TODO: @versions = options['versions'].collect do {|v| v['name']}
       @description = options['description']
-      @issue_types = options['issueTypes']
 
       # Get the issue types and custom field map
       # TODO: Should not do this every time we create an issue. Cache the results.
@@ -78,12 +75,14 @@ module JiraProfiler
       r = self.class.get("/rest/api/latest/issue/createmeta?projectKeys=#{key}&expand=projects.issuetypes.fields")
       r['projects'].first['issuetypes'].each do |type_data|
         type = type_data['name']
-        @issue_fields[type] = {:keys => {}, :names => {}}
-        type['fields'].each do |key, field|
-          @issue_fields[type][:keys][key] = field['name']
-          @issue_fields[type][:names][field['name']] = key
+        @issue_fields[type] = {}
+        type_data['fields'].each do |key, field|
+          @issue_fields[type][key] = field['name']
         end
       end
+
+      #puts "Found type: #{type}"
+      #pp @issue_fields
 
       # Prepare a reference object to store result
       @sprints = nil
@@ -98,16 +97,13 @@ module JiraProfiler
 
     end
 
-    def issue_types()
+    def issue_types
       @issue_fields.keys
     end
 
-    def issue_fields(issue_type = nil)
-      if issue_type.nil?
-        @issue_fields
-      else
-        @issue_fields[issue_type]
-      end
+    def issue_fields_for(issue_type)
+      puts "issue_fields for #{issue_type}"
+      @issue_fields[issue_type]
     end
 
     def rapid_view

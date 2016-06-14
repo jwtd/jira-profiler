@@ -5,6 +5,77 @@ module JiraProfiler
   # A command line interface to retrieve the data from Jira
   # Jira REST api https://docs.atlassian.com/jira/REST/latest/
 
+  #--------------------------------------------------------------
+  #                 Main objectives of program                  #
+  #--------------------------------------------------------------
+
+  # Company & Developer vacation log from Google Calendar
+  #    https://developers.google.com/google-apps/calendar/quickstart/ruby
+
+  # Sprint calendar log
+  # Sprint 26 was from 4/22/14 - 5/6/2014
+  # '2014.04.02' => {date: d, sprint: "Sprint #{sprint_num}"}
+
+
+  # Primary objects
+  #  Projects -> Issues -> Tasks -> Transitions
+  #  People -> Issues -> Tasks -> Transitions
+  #  Sprints -> Issues -> People
+  #  Issue types
+
+  # For Project
+  #   Sprints
+  #   Epics
+  #   Issues
+  #   Developers
+  #   Components
+
+  # For Sprint
+  #   Developer
+  #    # of stories
+  #    # of points
+  #    # of days
+  #    # of incomplete
+  #   AVG Time spent in development
+  #   AVG Time spent in review
+  #   AVG Time spent in QA
+  #   # of Scheduled
+  #   # non-scheduled
+  #   AVG Time spent on scheduled
+  #   AVG Time spent in non-scheduled
+
+  # For story
+  #   Age in days
+  #   Dev time in days
+  #   Spanned across X sprints (incompleted = S-1)
+  #   Time spent in development
+  #   Time spent in review
+  #   Time spent in QA
+  #   Scheduled vs non-scheduled
+
+  # Objectives
+  # Report sprint profiles - For each sprint
+  #   number of issues at start
+  #   number of issues at end
+  #   number of issues added
+  #   number of issues completed vs not completed
+  #   points added
+  #   points completed vs not completed
+  # Report elapsed time
+  #   between issues status transitions
+  #   for entire story
+  #   for each point Size across team
+  #   for each point Size by team member
+  # Report ratio of
+  #   type of issues (stories vs defects)
+  #   epics
+  #   tags
+  # Average number of sprints per story completed in each sprint
+  #  "customfield_10007"=>
+  # ["com.atlassian.greenhopper.service.sprint.Sprint@1d249cb[id=162,rapidViewId=26,state=CLOSED,name=Sprint 55,startDate=2015-06-09T14:47:33.197-04:00,endDate=2015-06-22T14:47:00.000-04:00,completeDate=2015-06-23T13:23:46.910-04:00,sequence=162]",
+  #  "com.atlassian.greenhopper.service.sprint.Sprint@aacc28[id=164,rapidViewId=33,state=ACTIVE,name=Sprint 56 - Dev Ops,startDate=2015-06-24T11:23:44.342-04:00,endDate=2015-07-06T11:23:00.000-04:00,completeDate=<null>,sequence=164]"],
+
+
   class Cli
 
     class << self
