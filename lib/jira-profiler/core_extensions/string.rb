@@ -8,6 +8,7 @@ module CoreExtensions
     end
 
     def to_snake_case!
+      gsub!(/\W/,' ')
       gsub!(/(.)([A-Z])/,'\1 \2')
       gsub!(/([_ ])+/, '_')
       downcase!

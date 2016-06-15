@@ -33,18 +33,4 @@ describe JiraProfiler::Project do
     end
   end
 
-  describe '.issue_types' do
-    it "should return an array of the project's issue types" do
-      expect(@project.issue_types).to eq ["Epic", "Story", "Bug", "Task", "Sub-task", "Ops Incident"]
-    end
-  end
-
-  describe '.issue_fields_for' do
-    it "should return a hash of the specified issue type's fields " do
-      fields = @project.issue_fields_for('Story')
-      expect(fields.keys.size).to eq 22
-      expect(fields['customfield_10008']).to eq 'Epic Link'
-    end
-  end
-
 end

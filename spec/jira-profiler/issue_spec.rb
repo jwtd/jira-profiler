@@ -7,9 +7,31 @@ describe JiraProfiler::Issue do
     @issue = JiraProfiler::Issue.new(issue_json)
   end
 
+  describe '#find_by' do
+    it "should find an issue by its issue id" do
+      i = JiraProfiler::Issue.find_by(26336)
+      expect(i.key).to eq 'WS-3531'
+    end
+    it "should find an issue by its label" do
+      i =  JiraProfiler::Issue.find_by('WS-3531')
+      expect(i.key).to eq 'WS-3531'
+    end
+  end
+
+  describe '#field_reference' do
+    it "should return a reference map of issue fields " do
+      fields = JiraProfiler::Issue.field_reference
+      expect(fields.keys.size).to eq 84
+      field = fields['customfield_10008']
+      expect(field.json_field).to eq 'customfield_10008'
+      expect(field.ui_label).to eq 'Epic Link'
+      expect(field.attr_sym).to eq :epic_link
+    end
+  end
+
   describe '.initialize' do
     it "should fetch the issues details from Jira" do
-      expect(@issue.project).to eq 'Web Stack'
+      expect(@issue.project.name).to eq 'Web Stack'
       expect(@issue.key).to eq 'WS-3531'
       expect(@issue.changes.size).to eq 25
     end
@@ -24,12 +46,6 @@ describe JiraProfiler::Issue do
   describe '.type' do
     it "should return the issue type" do
       expect(@issue.type).to eq "Story"
-    end
-  end
-
-  describe '.status' do
-    it "should return the issues current status" do
-      expect(@issue.status).to eq "Closed"
     end
   end
 
@@ -52,9 +68,40 @@ describe JiraProfiler::Issue do
     end
   end
 
-  describe '.epic' do
-    it "should return the issue's epic" do
-      expect(@issue.epic).to eq "Story"
+  describe '.status' do
+    it "should return the issues current status" do
+      expect(@issue.status).to eq "Closed"
+    end
+  end
+
+  describe '.epic_link' do
+    it "should be a dynamicly created accessor for a custom field" do
+      expect(@issue.epic_link).to eq "PM-96"
+    end
+  end
+
+  describe '.votes' do
+    it "should be a dynamicly created accessor that returns an integer" do
+      expect(@issue.votes).to eq 0
+    end
+  end
+
+  describe '.creator' do
+    it "should be a dynamicly created accessor that returns a users name" do
+      expect(@issue.creator).to eq 'Jordan Duggan'
+    end
+  end
+
+  describe '.attachment' do
+    it "should be a dynamicly created accessor that returns an array of file names" do
+      expect(@issue.attachment).to eq ["chrome.zip", "Screenshot 2016-04-13 14.42.34.png", "Screenshot 2016-04-13 14.42.34.png"]
+    end
+  end
+
+  describe '.progress' do
+    it "should be a dynamicly created accessor that returns a hash from the raw json" do
+      expect(@issue.progress["progress"]).to eq 0
+      expect(@issue.progress["total"]).to eq 0
     end
   end
 

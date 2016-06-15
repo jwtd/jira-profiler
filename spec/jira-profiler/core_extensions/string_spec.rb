@@ -27,6 +27,7 @@ describe CoreExtensions::String do
       expect('FooBarBaz'.to_snake_case).to eq 'foo_bar_baz'
       expect('Foo Bar Baz'.to_snake_case).to eq 'foo_bar_baz'
       expect('foo bar baz'.to_snake_case).to eq 'foo_bar_baz'
+      expect('foo bar/baz'.to_snake_case).to eq 'foo_bar_baz'
     end
   end
 
@@ -35,6 +36,7 @@ describe CoreExtensions::String do
       expect('FooBarBaz'.to_dash_case).to eq 'foo-bar-baz'
       expect('Foo Bar Baz'.to_dash_case).to eq 'foo-bar-baz'
       expect('foo bar baz'.to_dash_case).to eq 'foo-bar-baz'
+      expect('foo bar/baz'.to_dash_case).to eq 'foo-bar-baz'
     end
   end
 
