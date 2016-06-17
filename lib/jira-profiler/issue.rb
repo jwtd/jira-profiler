@@ -17,28 +17,39 @@ module JiraProfiler
 
     StatusIteration = Struct.new(:start_date, :end_date, :elapsed_time, :assignee, :sprint)
 
-    # Look up project by project name
-    def self.find_by(issue_id_or_label)
-      self.new(get("/rest/api/2/issue/#{issue_id_or_label}?expand=changelog"))
+
+    # Class methods ------------------
+
+
+    class << self
+
+      # Look up project by project name
+      def find_by(issue_id_or_label)
+        new(get("/rest/api/2/issue/#{issue_id_or_label}?expand=changelog"))
+      end
+
+      # The field reference for the system
+      def field_reference
+        if @@field_reference.nil?
+          @@field_reference = {}
+          r = get("/rest/api/2/field")
+          r.each do |field|
+            type =  field.has_key?('schema') ? field['schema']['type'] : nil
+            @@field_reference[field['key']] = Field.new(
+              field['key'],
+              field['name'],
+              field['name'].to_snake_case.to_sym,
+              type
+            )
+          end
+        end
+        @@field_reference
+      end
+
     end
 
-    # The field reference for the system
-    def self.field_reference
-      if @@field_reference.nil?
-        @@field_reference = {}
-        r = self.get("/rest/api/2/field")
-        r.each do |field|
-          type =  field.has_key?('schema') ? field['schema']['type'] : nil
-          @@field_reference[field['key']] = Field.new(
-            field['key'],
-            field['name'],
-            field['name'].to_snake_case.to_sym,
-            type
-          )
-        end
-      end
-      @@field_reference
-    end
+
+    # Instance methods ------------------
 
 
     # Given ID, Label, or json object
@@ -62,10 +73,10 @@ module JiraProfiler
       @contributors = Set.new()
 
       # History & Stats
-      @created_at  = DateTime.parse(f['created'])
+      @created_at     = DateTime.parse(f['created'])
       @statuses       = Set.new()
       @status_history = {}
-      @changes      = []
+      @changes        = []
 
       # Lookup and associate the value of each field with the name in the reference
       @field_map = {
@@ -98,6 +109,7 @@ module JiraProfiler
 
     end
 
+    # Bracket style search for field
     def [](name_or_sym_or_field)
       return @field_map[:ui_labels  ][name_or_sym_or_field] if @field_map[:ui_labels  ].has_key?(name_or_sym_or_field)
       return @field_map[:json_fields][name_or_sym_or_field] if @field_map[:json_fields].has_key?(name_or_sym_or_field)
@@ -227,6 +239,9 @@ module JiraProfiler
         @contributors << to
         @changes << Change.new(self, date, field, from, to, "Assignee from #{from} to #{to}")
       end
+
+      # Record the activity
+      User.find_by_username(@cur_assignee).record_assignment(@changes.last)
 
     end
 

@@ -131,6 +131,7 @@ module JiraProfiler
       @issues
     end
 
+
     # The list of users who worked on this project
     def contributors
       if @contributors.nil?
@@ -141,7 +142,6 @@ module JiraProfiler
       end
       @contributors
     end
-
 
   end
 

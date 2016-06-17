@@ -34,7 +34,7 @@ module JiraProfiler
     def load_team_data(team_filepath)
       path = File.expand_path(File.join('../../', team_filepath), __dir__)
       if File.exists?(path)
-        logger.error "Loading team data from #{path}"
+        logger.info "Loading team data from #{path}"
         @team_data = JSON.parse(File.read(path))
       else
         logger.error "Could not find team data file at #{path}"

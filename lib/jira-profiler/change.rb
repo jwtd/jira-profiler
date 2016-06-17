@@ -3,11 +3,11 @@ module JiraProfiler
   class Change
     include Logger
 
-    attr_reader :issue, :at, :field, :from, :to, :description
+    attr_reader :issue, :date, :field, :from, :to, :description
 
-    def initialize(issue, at, field, from, to, description)
+    def initialize(issue, date, field, from, to, description)
       @issue       = issue
-      @at          = at
+      @date        = date
       @field       = field
       @description = description
       if field == 'assignee'
@@ -19,7 +19,7 @@ module JiraProfiler
 
     # Convenience attribute to return project via parent issue
     def project
-      @issue.project .team.standardize_name(name)
+      @issue.project
     end
 
   end

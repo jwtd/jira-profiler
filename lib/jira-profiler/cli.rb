@@ -78,12 +78,18 @@ module JiraProfiler
 
   class Cli
 
+    # Only look up Jira objects once
+    @@user_cache    = nil
+    @@project_cache = nil
+    @@issue_cache   = nil
+
     class << self
 
       include Logger
 
-      attr_reader :args, :options, :team
+      attr_reader :args, :options
 
+      # Single entry point for all commands, that initilizes the CLI
       def run(task, args, options)
         logger.debug "Run #{JiraProfiler.config.app_name} #{JiraProfiler::VERSION::STRING} command #{task}"
         logger.debug "args: #{args.inspect}"
@@ -97,6 +103,18 @@ module JiraProfiler
       # Facilitate normalization of all versions of a team member's name to one value
       def standardize_name(name)
         @team.nil? ? name : @team.standardize_name(name)
+      end
+
+      # The field reference for the system
+      def self.available_users
+        if @@user_cache.nil?
+          @@user_cache = {}
+          r = get(get("/rest/api/2/user/search?username=%"))
+          r.each do |data|
+            @@user_cache[data['displayName']] = JiraProfiler::User.new(data)
+          end
+        end
+        @@user_cache
       end
 
 
@@ -114,7 +132,6 @@ module JiraProfiler
         }.merge(params)
 
         logger.debug "HTTParty::HTTPCache params = #{param.inspect}"
-        logger.info "HTTParty::HTTPCache = #{param[:use_cache]}"
 
         # Create a file system based cache
         @@cache = HTTParty::FileCache.new(param[:cache_domain], param[:cache_dir], 0)
@@ -134,15 +151,41 @@ module JiraProfiler
       def profile(args, options)
         # Create team and get project data
         @team = Team.new("#{options.project} Team", options.team_data_file)
-        p = Project.new(options.project)
+        p = Project.find_by_name(options.project)
         fi = p.issues.first
         puts "fi.statuses: #{fi.statuses}"
-        puts "fi.accumulated_time_in_status: #{fi.accumulated_time_in_status()}"
-        puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status()}"
+        puts "fi.accumulated_time_in_status: #{fi.accumulated_time_in_status('Open')}"
+        puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status('Open')}"
 
         # Loop over each issue in the project
-        #s = p.sprints
+        s = p.sprints
         #pp c = p.contributors
+
+        # history = OrderedHash.new()
+        # For each date
+        # r = Record.new()
+        # d    = Date
+        # S    = Project.active_sprint_on(date)
+        # Sw   = Project.week_of_sprint_on(date)
+        # Sd   = Project.day_of_sprint_on(date)
+        #
+        # history[YYYY.MM.DD] << Record.new(r)
+        #
+        # project.each do |p|
+        #   p.issues.each do |i|
+        #     record_issue(i)
+        #     issue.subtasks.each do |s|
+        #       record_issue(i,s)
+        #     end
+        #   end
+        # end
+        #
+        # record_issue(issue, subtask = nil)
+        # issue.transitions.each do |t|
+        #   record_transition(t)
+        # end
+        #
+        # record_transition(t)
 
       end
 
