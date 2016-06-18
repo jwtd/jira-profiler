@@ -1,4 +1,5 @@
 require 'active_support/all'
+require 'csv'
 require 'set'
 require 'pp'
 
@@ -10,6 +11,8 @@ module JiraProfiler
     attr_reader :id, :key, :name, :description, :contributors
 
     @@project_cache = {}
+
+    ProjectLogEntry = Struct.new(:label, :from_date, :to_date, :note)
 
 
     # Class methods ------------------
@@ -80,6 +83,31 @@ module JiraProfiler
       @issue_fields = nil
       @sprints = nil
 
+    end
+
+
+    # The manually imported sprint history
+    def schedule
+      if @schedule.nil?
+
+        # Validate presence of project_log
+        log_filepath = './data/web_stack_log.csv'
+        raise "A sprint_log_filepath was not provided." unless File.exists?(log_filepath)
+
+        # Import the sprint log
+        @schedule = ActiveSupport::OrderedHash.new()
+        data = CSV.read(log_filepath, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all})
+        data.each do |row|
+          from_date = Date.strptime(row[:from], "%m/%d/%y")
+          @schedule[from_date.strftime('%Y.%m.%d')] = ProjectLogEntry.new(
+            row[:sprint].to_s,
+            from_date,
+            Date.strptime(row[:to], "%m/%d/%y"),
+            row[:note]
+          )
+        end
+      end
+      @schedule
     end
 
 
