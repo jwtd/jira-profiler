@@ -147,46 +147,110 @@ module JiraProfiler
         }
       end
 
+      # A hash of dates for speedy date searching
+      def schedule(start_date = nil)
+        if @schedule.nil?
+          @schedule = {}
+
+          # TODO: Get sprint dates from Jira
+
+          # Init using date of first sprint Monday
+          today = Date.today()
+          cur_date  = Date.new(2013,1,1) if start_date.nil? # Tuesday
+          sprint_start = cur_date
+          sprint_end   = sprint_start + 13
+
+          day_index      = 1
+          week_index     = 1
+          sprint_index   = 1
+          week_of_sprint = 0
+          uweek = d.strftime('%U').to_i + 1
+
+          # Add all days between start date and today
+          while cur_date < today
+
+            @schedule[d.strftime('%Y.%m.%d')] = {
+              :date              => cur_date,
+              :uweek             => uweek,
+              :day_index         => day_index,
+              :week_index        => week_index,
+              :c_sprint_index    => sprint_index,  # Index of sprint as defined by calendar start date and end date rather than Jira data
+              :sprint_started_on => sprint_start,             # Calendar date of first day of sprint
+              :sprint_ended_on   => sprint_end,             # Calendar date of last day of sprint
+              :week_of_sprint    => week_of_sprint # 0 or 1 indicating first or second week of sprint,
+            }
+            #puts "#{day_index} : #{week_index} : #{sprint_index}.#{week_of_sprint} : #{d.strftime('%a %m.%d')} : #{s.strftime('%m.%d')} -> #{e.strftime('%m.%d')}"
+
+            # Check to see if we've rolled over a week
+            # Days in the sprint week (tue->mon the first week and mon->mon the second)
+            if (cur_date == (sprint_start + 6) or cur_date == sprint_end)
+              week_index += 1
+              week_of_sprint = week_of_sprint == 0 ? 1 : 0
+              # New sprint, reset start and end dates
+              if week_of_sprint == 0
+                sprint_index += 1
+                sprint_start = cur_date + 1
+                sprint_end = sprint_start + 13
+              end
+            end
+
+            # Increment before repeating
+            cur_date  += 1
+            day_index += 1
+          end
+
+          #Output dates
+          # c = Date.new(2014,4,1)
+          # while c < t
+          #   d = @schedule[c.strftime('%Y.%m.%d')]
+          #   puts "#{c.strftime('%a %Y.%m.%d')} : #{d[:day_index]} : #{d[:week_index]} : #{d[:c_sprint_index]}.#{d[:week_of_sprint]} : #{d[:date].strftime('%a %m.%d')} : #{d[:sprint_started_on].strftime('%m.%d')} -> #{d[:sprint_ended_on].strftime('%m.%d')}"
+          #   c += 1
+          # end
+        end
+        @schedule
+      end
+
+
       # Setup for all commands
       def profile(args, options)
         # Create team and get project data
         @team = Team.new("#{options.project} Team", options.team_data_file)
-        p = Project.find_by_name(options.project)
+
+        project = Project.find_by_name(options.project)
         fi = p.issues.first
         puts "fi.statuses: #{fi.statuses}"
         puts "fi.accumulated_time_in_status: #{fi.accumulated_time_in_status('Open')}"
         puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status('Open')}"
 
-        # Loop over each issue in the project
-        s = p.sprints
-        #pp c = p.contributors
-
         # history = OrderedHash.new()
         # For each date
-        # r = Record.new()
-        # d    = Date
-        # S    = Project.active_sprint_on(date)
-        # Sw   = Project.week_of_sprint_on(date)
-        # Sd   = Project.day_of_sprint_on(date)
+        # r  = Record.new()
+        # d  = Date
+        # S  = Project.active_sprint_on(date)
+        # Sw = Project.week_of_sprint_on(date)
+        # Sd = Project.day_of_sprint_on(date)
         #
         # history[YYYY.MM.DD] << Record.new(r)
-        #
-        # project.each do |p|
-        #   p.issues.each do |i|
-        #     record_issue(i)
-        #     issue.subtasks.each do |s|
-        #       record_issue(i,s)
-        #     end
-        #   end
-        # end
-        #
-        # record_issue(issue, subtask = nil)
-        # issue.transitions.each do |t|
-        #   record_transition(t)
-        # end
-        #
-        # record_transition(t)
 
+        # Loop over each issue in the project
+        projects.each do |project|
+          project.issues.each do |issue|
+            record_issue(issue)
+            issue.subtasks.each do |subtask|
+              record_issue(issue, subtask)
+            end
+          end
+        end
+
+      end
+
+      def record_issue(issue, subtask = nil)
+        issue.transitions.each do |transition|
+          record_transition(transition)
+        end
+      end
+
+      def record_transition(transition)
       end
 
     end
