@@ -69,6 +69,23 @@ describe CoreExtensions::Time do
     end
   end
 
+  describe '.weekend?' do
+    it 'should return boolean indicating if its a weekend or not' do
+      t2 = Time.new(2016,6,19)
+      t3 = Time.new(2016,6,20)
+      expect(t2.weekend?).to eq true
+      expect(t3.weekend?).to eq false
+    end
+  end
+
+  describe '.weekday?' do
+    it 'should return boolean indicating if its a weekday or not' do
+      t2 = Time.new(2016,6,19)
+      t3 = Time.new(2016,6,20)
+      expect(t2.weekday?).to eq false
+      expect(t3.weekday?).to eq true
+    end
+  end
 
   describe '.as_sortable_timestamp' do
     it 'should print the date as sortable string' do

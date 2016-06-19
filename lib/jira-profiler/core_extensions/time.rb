@@ -43,6 +43,14 @@ module CoreExtensions
       self.strftime('%Y.%m.%d')
     end
 
+    def weekend?
+      (self.saturday? or self.sunday?)
+    end
+
+    def weekday?
+      (not self.weekend?)
+    end
+
     def time_from(t)
       TimeDifference.between(self, t).humanize
     end
