@@ -71,29 +71,24 @@ module JiraProfiler
 
 
     def initialize(options)
-
       # Get issues metadata
       @id   = options['id']
       @key  = options['key']
       @name = options['name']
       @description = options['description']
       #TODO: @versions = options['versions'].collect do {|v| v['name']}
-
       # Prepare references
       @issue_fields = nil
       @sprints = nil
-
     end
 
 
-    # The manually imported sprint history
+    # Manually created sprint history
     def schedule
       if @schedule.nil?
-
         # Validate presence of project_log
         log_filepath = './data/web_stack_log.csv'
-        raise "A sprint_log_filepath was not provided." unless File.exists?(log_filepath)
-
+        raise "Project schedule could not be found at #{log_filepath}" unless File.exists?(log_filepath)
         # Import the sprint log
         @schedule = ActiveSupport::OrderedHash.new()
         data = CSV.read(log_filepath, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all})
