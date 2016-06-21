@@ -20,14 +20,13 @@ module JiraProfiler
   # Primary objects
   #  Projects -> Issues -> Tasks -> Transitions
   #  People -> Issues -> Tasks -> Transitions
-  #  Sprints -> Issues -> People
-  #  Issue types
+  #  Calendar -> Sprint -> Issues -> People
 
   # For Project
   #   Sprints
-  #   Epics
   #   Issues
   #   Developers
+  #   Epics
   #   Components
 
   # For Sprint
@@ -44,7 +43,7 @@ module JiraProfiler
   #   AVG Time spent on scheduled
   #   AVG Time spent in non-scheduled
 
-  # For story
+  # For issue
   #   Age in days
   #   Dev time in days
   #   Spanned across X sprints (incompleted = S-1)
@@ -148,40 +147,6 @@ module JiraProfiler
       end
 
 
-      # A hash of dates for speedy date searching
-      def history(project, from_date = nil, to_date = nil)
-        if @history.nil?
-
-          @history  = ActiveSupport::OrderedHash.new()
-          from_date = project.schedule.values.first.from_date if from_date.nil?
-          to_date   = Date.today() if to_date.nil?
-          sprint    = nil
-
-          # Add all days between start date and today
-          (from_date..to_date).each_with_index do |cur_date, day_index|
-
-            date_key = cur_date.strftime('%Y.%m.%d')
-            sprint   = project.schedule.fetch(date_key, sprint)
-            day_of_sprint  = cur_date - sprint.from_date
-            week_of_sprint = day_of_sprint / 7
-            week_index     = day_index / 7
-
-            @history[date_key] = {
-              :date       => cur_date,
-              :uweek      => cur_date.strftime('%U').to_i + 1,
-              :day_index  => day_index + 1,
-              :week_index => week_index,
-              :day_of_sprint => day_of_sprint,
-              :week_of_sprint => week_of_sprint,
-              :sprint     => sprint
-            }
-            puts "#{date_key} : #{week_index} : #{day_index} : #{week_of_sprint} : #{day_of_sprint}"
-          end
-        end
-        @history
-      end
-
-
       # Setup for all commands
       def profile(args, options)
         # Create team and get project data
@@ -194,7 +159,7 @@ module JiraProfiler
         # puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status('Open')}"
 
 
-        h = history(project)
+        c = project.calendar
 
         # Output dates
         # c = Date.new(2014,4,1)
@@ -204,25 +169,15 @@ module JiraProfiler
         #   c += 1
         # end
 
-        # history = OrderedHash.new()
-        # For each date
-        # r  = Record.new()
-        # d  = Date
-        # S  = Project.active_sprint_on(date)
-        # Sw = Project.week_of_sprint_on(date)
-        # Sd = Project.day_of_sprint_on(date)
-        #
-        # history[YYYY.MM.DD] << Record.new(r)
-
         # Loop over each issue in the project
-        # projects.each do |project|
-        #   project.issues.each do |issue|
-        #     record_issue(issue)
-        #     issue.subtasks.each do |subtask|
-        #       record_issue(issue, subtask)
-        #     end
-        #   end
-        # end
+        projects.each do |project|
+          project.issues.each do |issue|
+            record_issue(issue)
+            issue.subtasks.each do |subtask|
+              record_issue(issue, subtask)
+            end
+          end
+        end
 
       end
 
@@ -233,6 +188,7 @@ module JiraProfiler
       end
 
       def record_transition(transition)
+
       end
 
     end

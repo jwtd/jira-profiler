@@ -3,6 +3,15 @@ require 'pp'
 
 module JiraProfiler
 
+  # For issue
+  #   Age in days
+  #   Dev time in days
+  #   Spanned across X sprints (incompleted = S-1)
+  #   Time spent in development
+  #   Time spent in review
+  #   Time spent in QA
+  #   Scheduled vs non-scheduled
+
   class Issue < JiraApiBase
     include Logger
 

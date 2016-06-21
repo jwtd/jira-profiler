@@ -46,6 +46,7 @@ module JiraProfiler
       @vacation_log = {}
       data = CSV.read(log_filepath, { encoding: "UTF-8", headers: true, header_converters: :symbol, converters: :all})
       data.each do |r|
+        # Date.strptime(r[:date], "%m/%d/%y")
         d = Date.new(r[:year], r[:month], r[:day])
         k = d.strftime('%Y.%m.%d')
         @vacation_log[r[:who]] = {} unless @vaction_log.has_key?(r[:who])

@@ -2,6 +2,20 @@ require 'pp'
 
 module JiraProfiler
 
+  # For Sprint
+  #   Developer
+  #    # of stories
+  #    # of points
+  #    # of days
+  #    # of incomplete
+  #   AVG Time spent in development
+  #   AVG Time spent in review
+  #   AVG Time spent in QA
+  #   # of Scheduled
+  #   # non-scheduled
+  #   AVG Time spent on scheduled
+  #   AVG Time spent in non-scheduled
+
   class Sprint < JiraApiBase
     include Logger
 

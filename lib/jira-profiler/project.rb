@@ -83,7 +83,7 @@ module JiraProfiler
     end
 
 
-    # Manually created sprint history
+    # The manually created table of sprint names with corresponding start and end dates
     def schedule
       if @schedule.nil?
         # Validate presence of project_log
@@ -106,7 +106,86 @@ module JiraProfiler
     end
 
 
-    # Lazy load by looping over all sprints
+    # An Ordered Hash reflecting the day by day sprint calendar for the project, keyed by date in YYY.MM.DD format
+    def calendar(from_date = nil, to_date = nil)
+      if @calendar.nil?
+
+        @calendar  = ActiveSupport::OrderedHash.new()
+        from_date = schedule.values.first.from_date if from_date.nil?
+        to_date   = Date.today() if to_date.nil?
+        sprint    = nil
+
+        # Add all days between start date and today
+        (from_date..to_date).each_with_index do |cur_date, day_index|
+
+          date_key       = cur_date.strftime('%Y.%m.%d')
+          sprint         = schedule.fetch(date_key, sprint)
+          days_in_sprint = sprint.to_date.days_from(sprint.from_date).to_i
+          day_of_sprint  = cur_date.days_from(sprint.from_date).to_i
+          week_of_sprint = day_of_sprint / 7
+          week_index     = day_index / 7
+          weekday_index  = cur_date.wday
+          weekday        = cur_date.strftime('%A') # Sunday
+
+          @calendar[date_key] = {
+            :date       => cur_date,
+            :uweek      => cur_date.strftime('%U').to_i + 1,
+            :day_index  => day_index + 1,
+            :week_index => week_index,
+            :day_of_sprint => day_of_sprint,
+            :week_of_sprint => week_of_sprint,
+            :sprint     => sprint
+          }
+          puts "#{date_key} : #{week_index} : #{day_index} : Sprint #{sprint.label} (#{days_in_sprint}): #{week_of_sprint} : #{day_of_sprint} : #{cur_date.weekend?} : #{weekday} (#{weekday_index})"
+        end
+      end
+      @calendar
+    end
+
+
+    # An Ordered Hash reflecting the day by day project activity, keyed by date in YYY.MM.DD format
+    def history
+      if @history.nil?
+        issues.each do |issue|
+          record_issue(issue)
+          issue.subtasks.each do |subtask|
+            record_issue(issue, subtask)
+          end
+        end
+      end
+      @history
+    end
+
+
+    def record_issue(issue, subtask = nil)
+      issue.transitions.each do |transition|
+        record_transition(transition)
+      end
+    end
+
+    def record_transition(transition)
+
+      # date_key = transition.start_date.strftime('%Y.%m.%d')
+      #
+      # calendar[date_key][]={}
+      #
+      # issue
+      #   type
+      #   assignee
+      # transition
+      #   created
+      #   added
+      #   removed
+      #   assigned
+      #   started
+      #   ready
+      #   reviewed
+      #   closed
+      #   reopend
+
+    end
+
+    # The list of sprints which are recorded in Jira (note, these dates may not be reliable if Jira isn't maintained religously)
     def sprints
       if @sprint.nil?
         @sprints = ActiveSupport::OrderedHash.new()
