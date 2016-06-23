@@ -2,6 +2,8 @@ require 'json'
 
 module JiraProfiler
 
+  # Metrics breakdown by team (feature/devops)
+
   class Team
     include Logger
 

@@ -5,6 +5,23 @@ require 'pp'
 
 module JiraProfiler
 
+  # Report sprint profiles - For each sprint
+  #   number of issues at start
+  #   number of issues at end
+  #   number of issues added
+  #   number of issues completed vs not completed
+  #   points added
+  #   points completed vs not completed
+  # Report elapsed time
+  #   between issues status transitions
+  #   for entire story
+  #   for each point Size across team
+  #   for each point Size by team member
+  # Report ratio of
+  #   type of issues (stories vs defects)
+  #   epics
+  #   tags
+
   class Project < JiraApiBase
     include Logger
 
@@ -163,10 +180,11 @@ module JiraProfiler
       end
     end
 
+
     def record_transition(transition)
 
-      # date_key = transition.start_date.strftime('%Y.%m.%d')
-      #
+      date_key = transition.start_date.strftime('%Y.%m.%d')
+
       # calendar[date_key][]={}
       #
       # issue
@@ -174,6 +192,9 @@ module JiraProfiler
       #   assignee
       # transition
       #   created
+      #   decomposed
+      #   sized
+      #   resized
       #   added
       #   removed
       #   assigned
@@ -182,6 +203,7 @@ module JiraProfiler
       #   reviewed
       #   closed
       #   reopend
+
 
     end
 

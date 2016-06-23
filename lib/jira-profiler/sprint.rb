@@ -3,6 +3,24 @@ require 'pp'
 module JiraProfiler
 
   # For Sprint
+
+  # Report sprint profiles - For each sprint
+  #   number of issues at start
+  #   number of issues at end
+  #   number of issues added
+  #   number of issues completed vs not completed
+  #   points added
+  #   points completed vs not completed
+  # Report elapsed time
+  #   between issues status transitions
+  #   for entire story
+  #   for each point Size across team
+  #   for each point Size by team member
+  # Report ratio of
+  #   type of issues (stories vs defects)
+  #   epics
+  #   tags
+
   #   Developer
   #    # of stories
   #    # of points
