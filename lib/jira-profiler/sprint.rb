@@ -34,6 +34,19 @@ module JiraProfiler
   #   AVG Time spent on scheduled
   #   AVG Time spent in non-scheduled
 
+  # Issue Type
+  #   #
+  #   Sizes
+  #   # Histogram
+  #   Status
+  #     # Entered
+  #     # Exited
+  #     Elapsed Time
+  #   Points at start
+  #   Points at end
+
+
+
   class Sprint < JiraApiBase
     include Logger
 
@@ -42,7 +55,6 @@ module JiraProfiler
                 :all_pts, :completed_pts, :incomplete_pts, :punted_pts, :pulled_in_pts
 
     def initialize(project_board_id, sprint_id)
-      @logger = logger
 
       # Save identity
       @project_board_id = project_board_id
@@ -80,10 +92,12 @@ module JiraProfiler
       @start_date        = Date.parse(metadata["startDate"]) unless metadata["startDate"] == 'None'        # "09/Jun/15 2:47 PM"
       @end_date          = Date.parse(metadata["endDate"]) unless metadata["endDate"] == 'None'            # "22/Jun/15 2:47 PM"
       @complete_date     = Date.parse(metadata["completeDate"]) unless metadata["completeDate"] == 'None' # "None"
+
       @completed_issues  = contents['completedIssues']
       @incomplete_issues = contents['incompletedIssues']
       @punted_issues     = contents['puntedIssues']
       @pulled_in_issues  = contents['issueKeysAddedDuringSprint']
+
       @all_pts           = contents['allIssuesEstimateSum']['value'].to_f
       @completed_pts     = contents['completedIssuesEstimateSum']['value'].to_f
       @incomplete_pts    = contents['issuesNotCompletedEstimateSum']['value'].to_f
@@ -107,6 +121,23 @@ module JiraProfiler
     def pulled_in_issues_count
       pulled_in_issues.size
     end
+
+
+    # Return number of bugs, stories, tasks
+    # def issue_types
+    # end
+    #
+    # def planned_work
+    # end
+    #
+    # def unplanned_work
+    # end
+    #
+    # def expansion
+    # end
+    #
+    # def creep
+    # end
 
   end
 

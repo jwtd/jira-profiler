@@ -153,7 +153,7 @@ module JiraProfiler
             :week_of_sprint => week_of_sprint,
             :sprint     => sprint
           }
-          puts "#{date_key} : #{week_index} : #{day_index} : Sprint #{sprint.label} (#{days_in_sprint}): #{week_of_sprint} : #{day_of_sprint} : #{cur_date.weekend?} : #{weekday} (#{weekday_index})"
+          # puts "#{date_key} : #{week_index} : #{day_index} : Sprint #{sprint.label} (#{days_in_sprint}): #{week_of_sprint} : #{day_of_sprint} : #{cur_date.weekend?} : #{weekday} (#{weekday_index})"
         end
       end
       @calendar
@@ -183,27 +183,29 @@ module JiraProfiler
 
     def record_transition(transition)
 
-      date_key = transition.start_date.strftime('%Y.%m.%d')
-
-      # calendar[date_key][]={}
+      # date_key = transition.start_date.strftime('%Y.%m.%d')
+      # calendar[date_key][:issues][issue.key]
       #
-      # issue
-      #   type
-      #   assignee
-      # transition
-      #   created
-      #   decomposed
-      #   sized
-      #   resized
-      #   added
-      #   removed
-      #   assigned
-      #   started
-      #   ready
-      #   reviewed
-      #   closed
-      #   reopend
-
+      # record_day
+      # record_sprint
+      # record_assignee
+      #
+      # # issue
+      # #   type
+      # #   assignee
+      # # transition
+      # #   created
+      # #   decomposed
+      # #   sized
+      # #   resized
+      # #   added
+      # #   removed
+      # #   assigned
+      # #   started
+      # #   ready
+      # #   reviewed
+      # #   closed
+      # #   reopend
 
     end
 

@@ -158,7 +158,6 @@ module JiraProfiler
         # puts "fi.accumulated_time_in_status: #{fi.accumulated_time_in_status('Open')}"
         # puts "fi.elapsed_time_in_status: #{fi.elapsed_time_in_status('Open')}"
 
-
         c = project.calendar
 
         # Output dates
