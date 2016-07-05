@@ -39,7 +39,7 @@ module JiraProfiler
     include Logger
 
     attr_reader :key, :name, :username, :active, :email
-    attr :projects, :sprints, :issues, :assignments
+    attr :projects, :sprints, :issues, :activity
 
     # Class methods ------------------
 
@@ -70,13 +70,11 @@ module JiraProfiler
       @projects    = Set.new()
       @sprints     = Set.new()
       @issues      = Set.new()
-      @assignments = {}
     end
 
-    def record_assignment(change)
+    def record_change(change)
       @projects << change.issue.project
       @issues   << change.issue
-      @assignments << change
       d = change.date.as_sortable_date
       unless @activity.has_key?(d)
         @activity[d] = [change]

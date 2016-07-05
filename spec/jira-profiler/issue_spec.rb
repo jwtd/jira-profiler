@@ -56,6 +56,12 @@ describe JiraProfiler::Issue do
     end
   end
 
+  describe '.status' do
+    it "should return the issues current status" do
+      expect(@issue.status).to eq "Closed"
+    end
+  end
+
   describe '.accumulated_hours_in_status' do
     it "should return the accumulated hours spent in a status" do
       expect(@issue.accumulated_hours_in_status('Open')).to eq 118.99 # (93.32 + 25.67)
@@ -65,12 +71,6 @@ describe JiraProfiler::Issue do
   describe '.elapsed_hours_in_status' do
     it "should return the hours between the first time a status was set and the last" do
       expect(@issue.elapsed_hours_in_status('Open')).to eq 119.27
-    end
-  end
-
-  describe '.status' do
-    it "should return the issues current status" do
-      expect(@issue.status).to eq "Closed"
     end
   end
 
