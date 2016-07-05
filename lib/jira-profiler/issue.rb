@@ -16,16 +16,11 @@ module JiraProfiler
     include Logger
 
     attr_reader :project, :id, :key, :type,
-                :statuses, :status_history, :status_cat,
-                :sprints, :changes, :contributors
+                :changes, :statuses, :field_history, :status_category,
+                :sprints, :current_sprint,
+                :assignee, :contributors
 
     @@field_reference = nil
-
-    # TODO: May be better of making this a class
-    Field = Struct.new(:json_field, :ui_label, :attr_sym, :type)
-
-    StatusIteration = Struct.new(:start_date, :end_date, :elapsed_time, :assignee, :sprint)
-
 
     # Class methods ------------------
 
@@ -35,24 +30,6 @@ module JiraProfiler
       # Look up project by project name
       def find_by(issue_id_or_label)
         new(get("/rest/api/2/issue/#{issue_id_or_label}?expand=changelog"))
-      end
-
-      # The field reference for the system
-      def field_reference
-        if @@field_reference.nil?
-          @@field_reference = {}
-          r = get("/rest/api/2/field")
-          r.each do |field|
-            type =  field.has_key?('schema') ? field['schema']['type'] : nil
-            @@field_reference[field['key']] = Field.new(
-              field['key'],
-              field['name'],
-              field['name'].to_snake_case.to_sym,
-              type
-            )
-          end
-        end
-        @@field_reference
       end
 
     end
@@ -72,33 +49,26 @@ module JiraProfiler
       @id          = options['id']
       @key         = options['key']
       @type        = f['issuetype']['name']
-      @status_cat  = f['status']['statusCategory']['name']
-
+      @status      = f['status']['name']
+      @status_category = f['status']['statusCategory']['name']
 
       # Associations
-      @comments     = f['comment']['comments'] if f['comment']
-      @subtasks     = nil
-      @sprints      = Set.new()
-      @contributors = Set.new()
+      @comments       = f['comment']['comments'] if f['comment']
+      @subtasks       = nil
+      @current_sprint = nil
+      @contributors   = Set.new()
+      @current_assignee = nil
 
       # History & Stats
       @created_at     = DateTime.parse(f['created'])
-      @statuses       = Set.new()
-      @status_history = {}
       @changes        = []
+      @fields         = {}  # TODO: Should merge changes and field_history
 
       # Lookup and associate the value of each field with the name in the reference
-      @field_map = {
-        :ui_labels   => {},
-        :json_fields => {},
-        :attr_syms   => {}
-      }
       f.keys.each do |field_key|
-        field = self.class.field_reference[field_key]
+        field = JiraProfiler::Field[field_key]
         value = resolve_value(f[field.json_field])
-        @field_map[:ui_labels][ui_label] = value
-        @field_map[:json_fields][field.json_field] = value
-        @field_map[:attr_syms][field.attr_sym] = value
+        @fields[field.attr_sym] = JiraProfiler::FieldHistory.new(field, value, created_at)
       end
 
       # Step through the issue's history and record transitions
@@ -118,35 +88,6 @@ module JiraProfiler
 
     end
 
-    # Bracket style search for field
-    def [](name_or_sym_or_field)
-      return @field_map[:ui_labels  ][name_or_sym_or_field] if @field_map[:ui_labels  ].has_key?(name_or_sym_or_field)
-      return @field_map[:json_fields][name_or_sym_or_field] if @field_map[:json_fields].has_key?(name_or_sym_or_field)
-      return @field_map[:attr_syms  ][name_or_sym_or_field] if @field_map[:attr_syms  ].has_key?(name_or_sym_or_field)
-    end
-
-    # Return boolean based on presence of a field
-    def has_field?(name_or_sym_or_field)
-      (not self[name_or_sym_or_field].nil?)
-    end
-
-    # Return the value of a field or if its nil, the default
-    def fetch(name_or_sym_or_field, default)
-      self[name_or_sym_or_field] || default
-    end
-
-    # Get the list of custom fields from the project config
-    def fields
-      @field_map[:ui_labels].keys
-    end
-
-    # If a field isn't defined, check to see if its exists and create an accessor for it
-    def method_missing(method_sym, *arguments, &block)
-      if has_field?(method_sym) and not [:issuetype, :changelog, :comments, :issuelinks].include?(method_sym)
-        define_dynamic_field(method_sym)
-        send(method_sym)
-      end
-    end
 
     # Returns all subtasks beloning to a project
     def subtasks
@@ -157,21 +98,58 @@ module JiraProfiler
         r['issues'].each do |issue|
           # Cast raw response to Issue()
           @subtasks[issue['key']] = Issue.new(issue)
+          # TODO: Merge subtask history into this issues history
         end
       end
       @subtasks
     end
 
-    # How much time was spent in each of the statuses
-    def accumulated_hours_in_status(status, assignee = :all)
-      status_history[status].inject(0) do |sum, i|
-        sum + i.elapsed_time if assignee == :all or assignee == i.assignee
+
+    # Bracket style search for field
+    def [](name_or_sym_or_field)
+      fields[JiraProfiler::Field[name_or_sym_or_field].attr_sym].current_value
+    end
+
+
+    # Return the value of a field or if its nil, the default
+    def fetch(name_or_sym_or_field, default)
+      self[name_or_sym_or_field] || default
+    end
+
+
+    # Return boolean based on presence of a field
+    def has_field?(name_or_sym_or_field)
+      (not self[name_or_sym_or_field].nil?)
+    end
+
+
+    # List of symbols for the fields on this issue
+    def field_list
+      fields.keys
+    end
+
+
+    # If a field isn't defined, check to see if its exists and create an accessor for it
+    def method_missing(method_sym, *arguments, &block)
+      if has_field?(method_sym) and not [:issuetype, :changelog, :comments, :issuelinks].include?(method_sym)
+        define_dynamic_field(method_sym)
+        send(method_sym)
       end
     end
 
+
+    # How much time was spent in each of the statuses
+    def accumulated_hours_in_status(status, assignee = :all)
+      fields['status'].periods_when_value_was(status).inject(0) do |sum, period|
+        sum + period[:elapsed_time] if assignee == :all or assignee == period[:assignee]
+      end
+    end
+
+
     # How much time passed between the first time a status was set and the last time
     def elapsed_hours_in_status(status)
-      status_history[status].first.start_date.hours_from(status_history[status].last.end_date)
+      periods = fields['status'].periods_when_value_was(status)
+      periods.first[:start_date].hours_from(periods.last[:end_date])
     end
 
 
@@ -207,50 +185,29 @@ module JiraProfiler
       return data
     end
 
+
+
     # Recrods relevant changes, but not all items in history
     def record_change(date, field, from, to)
 
-      # Track changes in issue status
-      if field == 'status'
-        # Set the ending date of the last status
-        if status_history.has_key?(from)
-          status_history[from].last[:end_date] = date
-          status_history[from].last[:elapsed_time] = status_history[from].last[:start_date].hours_from(status_history[from].last[:end_date])
-        end
-        # Add status if it doesn't exist
-        statuses << to
-        status_history[to] = [] unless status_history.has_key?(to)
-        status_history[to] << StatusIteration.new(date, nil, nil, @cur_assignee, @cur_sprint)
-        @changes << Change.new(self, date, field, from, to, "Status changed from #{from} to #{to}")
-      end
+      fields[field].record_change(
+        :value      => to,
+        :start_date => date,
+        :sprint     => current_sprint,
+        :assignee   => assignee)
 
       # Track sprint inclusion / ejection
       if field == 'Sprint'
-        if to.nil?
-          s = "Removed from #{from}"
-        else
-          s = "Added to #{to}"
-          @sprints << to
-        end
-        # Capture the change in sprint so that we can filter out in-sprint vs out-of sprint time in the future
-        @cur_sprint = to
-        @changes << Change.new(self, date, field, from, to, s)
-      end
-
-      # Track changes in story points
-      if field == 'Story Points'
-        @changes << Change.new(self, date, field, from, to, "Size changed from #{from} to #{to} points")
+        @current_sprint = to
       end
 
       # Track the developer
       if field == 'assignee'
-        @cur_assignee = to
-        @contributors << to
-        @changes << Change.new(self, date, field, from, to, "Assignee from #{from} to #{to}")
+        @contributors << to unless to.nil?
+        @current_assignee = to
       end
 
-      # Record the activity
-      User.find_by_username(@cur_assignee).record_assignment(@changes.last)
+      @changes << Change.new(self, date, field, from, to, @current_assignee, @current_sprint)
 
     end
 

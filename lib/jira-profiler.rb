@@ -21,5 +21,6 @@ require "jira-profiler/team"
 require "jira-profiler/project"
 require "jira-profiler/sprint"
 require "jira-profiler/issue"
+require "jira-profiler/field"
 require "jira-profiler/change"
-require "jira-profiler/record"
+
