@@ -46,22 +46,28 @@ module JiraProfiler
   #   Points at end
 
 
-
   class Sprint < JiraApiBase
     include Logger
 
-    attr_reader :id, :name, :current_state, :start_date, :end_date, :complete_date,
+    attr_reader :project, :id, :name, :current_state, :start_date, :end_date, :complete_date,
                 :completed_issues, :incomplete_issues, :punted_issues, :pulled_in_issues,
                 :all_pts, :completed_pts, :incomplete_pts, :punted_pts, :pulled_in_pts
 
-    def initialize(project_board_id, sprint_id)
+    # The list of sprints which are recorded in Jira (note, these dates may not be reliable if Jira isn't maintained religously)
+    def initialize(options)
 
-      # Save identity
-      @project_board_id = project_board_id
-      @id               = sprint_id
+      @project    = options[:project]
+      @id         = options[:id]
+      @name       = options[:name]
+      @start_date = options.fetch(:start_date)
+      @end_date   = options.fetch(:end_date)
+      @note       = options.fetch(:note)
+
+      # Get list of issues in a sprint
+      # /rest/api/latest/search?jql=sprint%3D<SPRINT_ID>&fields=<FIELDS YOU WANT>&maxResults=<SOME REASONABLE LIMIT>
 
       # Get sprint stats
-      jira_sprint = self.class.get("/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=#{@project_board_id}&sprintId=#{@id}")
+      jira_sprint = self.class.get("/rest/greenhopper/1.0/rapid/charts/sprintreport?rapidViewId=#{project.id}&sprintId=#{id}")
       metadata = jira_sprint['sprint']
       contents = jira_sprint['contents']
       # Pulled in stories have to be queried separately
@@ -103,6 +109,22 @@ module JiraProfiler
       @incomplete_pts    = contents['issuesNotCompletedEstimateSum']['value'].to_f
       @punted_pts        = contents['puntedIssuesEstimateSum']['value'].to_f
       @pulled_in_pts     = pulled_in_pts
+
+      @activity = {
+        :assignees   => {},
+        :issue_types => {},
+        :calendar    => ActiveSupport::OrderedHash.new()
+      }
+
+    end
+
+    # The number of days in the sprint
+    def length
+      end_date.days_from(start_date).to_i
+    end
+
+
+    def activity
 
     end
 
