@@ -3,7 +3,7 @@ module JiraProfiler
   class Change
     include Logger
 
-    attr_reader :issue, :date, :field, :from, :to, :description
+    attr_reader :issue, :date, :field, :from, :to, :description, :elapsed_hours
 
     def initialize(issue, date, field, from, to, current_assignee, current_sprint)
       @event    = :unknown
@@ -14,6 +14,7 @@ module JiraProfiler
       @to       = to
       @assignee = current_assignee
       @sprint   = current_sprint
+      @elapsed_hours = nil
 
       # Track the developer
       if field == 'assignee'
